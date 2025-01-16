@@ -1,7 +1,17 @@
 
 import * as Yup from 'yup';
 
-const SignInValidationSchema = Yup.object().shape({
+const SignUpValidationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .required('First name is required')
+    .min(2, 'first name must be minimum 2 characters')
+    .max(50, ('first name must be maximum 50 characters')),
+
+  lastName: Yup.string()
+    .required('First name is required')
+    .min(2, 'first name must be minimum 2 characters')
+    .max(50, ('first name must be maximum 50 characters')),
+
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is required'),
@@ -19,6 +29,6 @@ const SignInValidationSchema = Yup.object().shape({
     .required(' Confirm Password is Required'),
 });
 
-export { SignInValidationSchema };
+export { SignUpValidationSchema };
 
-export type SignUpType = Yup.InferType<typeof SignInValidationSchema>;
+export type SignUpType = Yup.InferType<typeof SignUpValidationSchema>;

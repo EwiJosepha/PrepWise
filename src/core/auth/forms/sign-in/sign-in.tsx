@@ -1,17 +1,15 @@
 'use client'
 import Image from 'next/image'
 import { Form, Formik } from 'formik'
-import { SignUpValidationSchema } from '@/schemas/auth.schema/sign-up.schema'
+import { SignInValidationSchema } from '@/schemas/auth.schema/sign-in.schema'
 import FormControl from '../form-control'
 import image from '../../../../assets/images/sign-up-image.jpeg'
 import Button from '@/components/button'
 import Link from 'next/link'
 
-function SignUp() {
+function SignIn() {
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -23,7 +21,7 @@ function SignUp() {
 
   return (
     <div className='h-screen bg-white lg:py-10 py-2'>
-      <div className='flex flex-row justify-center  h-full gap-[93px] px-8'>
+      <div className='flex flex-row justify-center items-center  h-full gap-[93px] px-8'>
         <div className='flex-1 hidden lg:flex max-w-[692px] justify-center'>
           <div className='w-full h-full overflow-hidden rounded-lg xl:rounded-2xl'>
             <Image
@@ -39,7 +37,7 @@ function SignUp() {
           <p className='font-bold text-5xl text-indigo-500 lg:pb-1 pb-10 text-center'>Prep Wise@</p>
           <Formik
             initialValues={initialValues}
-            validationSchema={SignUpValidationSchema}
+            validationSchema={SignInValidationSchema}
             onSubmit={onSubmit}
             validateOnMount
             
@@ -47,23 +45,6 @@ function SignUp() {
             {({  isValid }) => (
               <Form className="flex flex-col items-center">
                 <div className='w-full flex flex-col gap-[19px] pb-8'>
-                  <div className='flex flex-col lg:gap-[31px] gap-[19px] w-full'>
-                    <FormControl
-                      name='firstName'
-                      control='text-input'
-                      label={'First name'}
-                      placeholder={'First name'}
-                      type='text'
-                    />
-                    <FormControl
-                      control='text-input'
-                      type='text'
-                      name='lastName'
-                      label={'Last name'}
-                      placeholder={'Last name'}
-                    />
-                  </div>
-
                   <div className='flex flex-col lg:gap-[31px] gap-[19px]'>
                     <FormControl
                       control='text-input'
@@ -106,29 +87,29 @@ function SignUp() {
               </Form>
             )}
           </Formik>
-          <div className='h-[45px]' />
+          <div className='h-[25px]' />
 
           <div className='flex justify-center'>
         <p className='font-bold text-md'
       
-        > Already have an account?</p>
+        > Don't have an account?</p>
         <p>
           <Link
-            href='/sign-in'
+            href='/sign-up'
             className='text-indigo-500 pl-1 text-[16px] underline'
           >
-            Login
+            Sign up
           </Link>
         </p>
       </div>
       <p className='text-center text-[16px] text-slate-gray xl:pt-4'>
       ©2025 ALL RIGHTS RESERVED PrepWise@
       </p>
-      <div className='h-[45px]' />
+      <div className='h-[25px]' />
         </div>
       </div>
     </div>
   )
 }
 
-export default SignUp;
+export default SignIn;
