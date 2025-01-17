@@ -2,6 +2,9 @@ import { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
 import { TestimonialBottomSvg, TestimonialTopSvg } from "../svg-components/testimonial-svg";
+import faith from "@/assets/images/missfaith.jpg"
+import gmarvis from "@/assets/images/Gmarvis Sam.jpg"
+import rash from "@/assets/images/rash.jpg"
 
 const testimonialData: Testimonial[] = [
   {
@@ -10,7 +13,7 @@ const testimonialData: Testimonial[] = [
     designation: "Manager at Rebase",
     content:
       "Our members are so impressed. It's intuitive. It's clean. It's distraction free.",
-    image: "/assets/images/missfaith.jpg",
+    image: faith,
     star: 5,
   },
   {
@@ -19,7 +22,7 @@ const testimonialData: Testimonial[] = [
     designation: "Developer",
     content:
       "As a developer, I appreciate how intuitive and efficient this app is. It helps me during my interviews",
-    image: "/assets/images/Gmarvis Sam.jpg",
+    image: gmarvis,
     star: 5,
   },
   {
@@ -28,7 +31,7 @@ const testimonialData: Testimonial[] = [
     designation: "Developer",
     content:
       "This app has become an essential tool in my interview preps. Its accuracy and user-friendly interface help me to get set during interviews",
-    image: "/assets/images/rash.jpg",
+    image: rash,
     star: 5,
   },
 ];
@@ -36,7 +39,7 @@ const testimonialData: Testimonial[] = [
 const Testimonials = () => {
   return (
     <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28 bg-indigo-800">
-      <div className="container  px-20 xl:px-40">
+      <div className="px-10 md:px-20">
         <SectionTitle
           title="What Our Users Say"
           paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."

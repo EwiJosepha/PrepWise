@@ -6,14 +6,14 @@ const Features = () => {
   return (
     <>
       <section id="features" className="py-16 md:py-20 lg:py-28 bg-indigo-900 text-white">
-        <div className="container">
+        <div className=" flex flex-col items-center">
           <SectionTitle
             title="Main Features"
             paragraph="Prep wise@ provides features such as resume review, accurate response, speedy response..."
             center
           />
 
-          <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-2 xl:pl-48  lg:px-20 px-20">
+          <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-2 px-8 md:px-20 md:gap-10">
             {featuresData.map((feature) => (
               <SingleFeature key={feature.id} feature={feature} />
             ))}
