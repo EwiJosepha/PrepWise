@@ -24,15 +24,7 @@ const Header = () => {
     window.addEventListener("scroll", handleStickyNavbar);
   });
 
-  // submenu handler
-  const [openIndex, setOpenIndex] = useState(-1);
-  const handleSubmenu = (index: SetStateAction<number>) => {
-    if (openIndex === index) {
-      setOpenIndex(-1);
-    } else {
-      setOpenIndex(index);
-    }
-  };
+
 
   const usePathName = usePathname();
 
@@ -52,7 +44,7 @@ const Header = () => {
                 <p className="font-bold text-indigo-500">Prep Wise@</p>
               </Link>
             </div>
-            <div className="flex w-full justify-end px-4">
+            <div className="flex w-full  items-center  justify-end px-4">
               <div>
                 <button
                   onClick={navbarToggleHandler}
