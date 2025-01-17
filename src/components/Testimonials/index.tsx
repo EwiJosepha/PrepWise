@@ -42,7 +42,7 @@ const Testimonials = () => {
       <div className="px-10 md:px-20">
         <SectionTitle
           title="What Our Users Say"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          paragraph="Discover the transformative power of personalized learning with Prepwise, where expert mentorship meets cutting-edge educational technology"
           center
         />
 
