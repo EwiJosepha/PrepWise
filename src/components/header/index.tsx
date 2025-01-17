@@ -101,12 +101,15 @@ const Header = () => {
                 >
                   Sign In
                 </Link>
+                <div className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5">
                 <Link
                   href="/sign-up"
-                  className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
+                  className=""
                 >
                   Sign Up
                 </Link>
+                </div>
+             
                 <div>
                 </div>
               </div>
