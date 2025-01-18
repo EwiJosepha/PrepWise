@@ -6,6 +6,7 @@ import FormControl from '../form-control'
 import image from '../../../../assets/images/sign-up-image.jpeg'
 import Button from '@/components/button'
 import Link from 'next/link'
+import { createUser } from '@/utils/api'
 
 function SignUp() {
 
@@ -17,8 +18,14 @@ function SignUp() {
     confirmPassword: ""
   }
 
-  const onSubmit = (values: any) => {
+  const onSubmit = async (values: any) => {
     console.log(values);
+    try{ 
+    const data =  await createUser(values);
+    console.log('User created successfully:', data);
+  } catch (error) {
+    console.error('Error creating user:', error);
+  }
   }
 
   return (

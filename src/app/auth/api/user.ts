@@ -6,9 +6,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await connectToDatabase();
 
   if (req.method === 'POST') {
-    const { firstName, lastName } = req.body;
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
 
-    const user = new User({ firstName, lastName });
+    const user = new User({ firstName, lastName, email, password, confirmPassword });
     await user.save();
 
     return res.status(201).json(user);
