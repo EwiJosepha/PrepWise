@@ -1,6 +1,6 @@
 export async function createUser(values: { firstName: string; lastName: string; email: string; password: string }) {
   try {
-    const response = await fetch('/api', {
+    const response = await fetch('/api/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -10,11 +10,10 @@ export async function createUser(values: { firstName: string; lastName: string; 
 
     if (!response.ok) {
       console.log(response);
-      
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
+    const { data } = await response.json();
     return data;
   } catch (error) {
     console.error('Error creating user:', error);
