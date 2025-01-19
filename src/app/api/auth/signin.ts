@@ -33,6 +33,8 @@ export async function POST(request: Request) {
       email: existingUser.email,
     });
 
+    console.log({token});
+    
     return NextResponse.json({ data: { email: existingUser.email }, token }, { status: 200 });
   }
   catch (error) {

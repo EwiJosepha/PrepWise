@@ -12,7 +12,6 @@ function SignIn() {
   const initialValues = {
     email: "",
     password: "",
-    confirmPassword: ""
   }
 
   const onSubmit = (values: any) => {
@@ -62,13 +61,6 @@ function SignIn() {
                       type='password'
                       placeholder={'Password'}
                       label={'Password'}
-                    />
-                    <FormControl
-                      control='text-input'
-                      name='confirmPassword'
-                      type='password'
-                      placeholder={'Confirm Password'}
-                      label={'Confirm Password'}
                     />
                   </div>
                 </div>
