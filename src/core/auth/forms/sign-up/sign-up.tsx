@@ -19,13 +19,12 @@ function SignUp() {
   }
 
   const onSubmit = async (values: any) => {
-    console.log(values);
-    try{ 
-    const data =  await createUser(values);
-    console.log('User created successfully:', data);
-  } catch (error) {
-    console.error('Error creating user:', error);
-  }
+    try {
+      const data = await createUser(values);
+      console.log('User created successfully:', data);
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
   }
 
   return (

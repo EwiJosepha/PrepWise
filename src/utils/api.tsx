@@ -1,6 +1,6 @@
 export async function createUser(values: { firstName: string; lastName: string; email: string; password: string }) {
   try {
-    const response = await fetch('/auth/api/user', {
+    const response = await fetch('/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
