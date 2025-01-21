@@ -12,7 +12,7 @@ export interface TextInputProps {
 const TextInput: React.FC<TextInputProps> = ({ name, label, type, placeholder, ...rest }) => {
   return (
     <div className=' flex flex-col'>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className='text-white'>{label}</label>
       <Field name={name}>
         {({ field }: FieldProps) => (
           <input

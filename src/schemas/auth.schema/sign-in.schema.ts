@@ -13,10 +13,6 @@ const SignInValidationSchema = Yup.object().shape({
     .matches(/[A-Z]/, 'Must contain upper case character')
     .matches(/[0-9]/, 'Must include a number')
     .matches(/[\W_]/, 'Must include a special character'),
-
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Password must match')
-    .required(' Confirm Password is Required'),
 });
 
 export { SignInValidationSchema };

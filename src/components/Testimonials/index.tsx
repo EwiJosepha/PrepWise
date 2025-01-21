@@ -30,7 +30,7 @@ const testimonialData: Testimonial[] = [
     name: "Rash Lafeh",
     designation: "Developer",
     content:
-      "This app has become an essential tool in my interview preps. Its accuracy and user-friendly interface help me to get set during interviews",
+      "As a developer, I appreciate how intuitive and efficient this app is. It helps me during my interviews",
     image: rash,
     star: 5,
   },
@@ -38,11 +38,11 @@ const testimonialData: Testimonial[] = [
 
 const Testimonials = () => {
   return (
-    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28 bg-indigo-800">
-      <div className="px-10 md:px-20">
+    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28 bg-secondary">
+      <div className="px-4 md:px-14  ls:px-40">
         <SectionTitle
           title="What Our Users Say"
-          paragraph="Discover the transformative power of personalized learning with Prepwise, where expert mentorship meets cutting-edge educational technology"
+          paragraph="Discover the transformation power of personalized learning with Prepwis@, where we help you get hired"
           center
         />
 

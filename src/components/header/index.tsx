@@ -5,13 +5,11 @@ import { SetStateAction, useEffect, useState } from "react";
 import menuData from "./menuData";
 
 const Header = () => {
-  // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarToggleHandler = () => {
     setNavbarOpen(!navbarOpen);
   };
 
-  // Sticky Navbar
   const [sticky, setSticky] = useState(false);
   const handleStickyNavbar = () => {
     if (window.scrollY >= 80) {
@@ -31,9 +29,9 @@ const Header = () => {
   return (
     <>
       <header
-        className={`left-0 top-0 z-40 flex flex-col w-full   bg-thick-blue`}
+        className={`left-0 top-0 z-40 sticky flex flex-col w-full   bg-thick-blue`}
       >
-        <div className=" flex flex-col md:px-20 px-8 w-full  justify-between bg-indigo-900 ">
+        <div className=" flex flex-col md:px-20 px-4 w-full  justify-between bg-primary">
           <div className="relative -mx-4 flex  justify-between">
             <div className="w-60 max-w-full px-4 xl:mr-12 ">
               <Link
@@ -41,7 +39,7 @@ const Header = () => {
                 className={` block w-full ${sticky ? "py-5 lg:py-2" : "py-8"
                   } `}
               >
-                <p className="font-bold text-indigo-500">Prep Wise@</p>
+                <p className="font-bold text-blue-500 md:text-2xl">Prep Wise@</p>
               </Link>
             </div>
             <div className="flex w-full  items-center  justify-end px-4">
@@ -50,18 +48,18 @@ const Header = () => {
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
                   aria-label="Mobile Menu"
-                  className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                  className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-white focus:ring-2 lg:hidden"
                 >
                   <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${navbarOpen ? " top-[7px] rotate-45" : " "
+                    className={`relative my-1.5 block h-0.5 w-[30px] bg-white transition-all duration-300 dark:bg-white ${navbarOpen ? " top-[7px] rotate-45" : " "
                       }`}
                   />
                   <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${navbarOpen ? "opacity-0 " : " "
+                    className={`relative my-1.5 block h-0.5 w-[30px] bg-white transition-all duration-300 dark:bg-white ${navbarOpen ? "opacity-0 " : " "
                       }`}
                   />
                   <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${navbarOpen ? " top-[-8px] -rotate-45" : " "
+                    className={`relative my-1.5 block h-0.5 w-[30px] bg-white transition-all duration-300 dark:bg-white ${navbarOpen ? " top-[-8px] -rotate-45" : " "
                       }`}
                   />
                 </button>
@@ -97,11 +95,11 @@ const Header = () => {
               <div className="flex items-center justify-end pr-16 lg:pr-0">
                 <Link
                   href="/sign-in"
-                  className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 text-white dark:text-white md:block"
+                  className="hidden px-4 py-3 m:px-7 text-base font-medium text-dark hover:opacity-70 text-white dark:text-white md:block"
                 >
                   Sign In
                 </Link>
-                <div className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5">
+                <div className="inline-block rounded-sm bg-black px-4 py-3 m:px-8 text-base font-semibold text-white duration-300 ease-in-out hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5">
                 <Link
                   href="/sign-up"
                   className=""
