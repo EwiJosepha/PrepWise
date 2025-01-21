@@ -52,7 +52,7 @@ function SignIn() {
   }
 
   return (
-    <div className='h-screen bg-white lg:py-10 py-2'>
+    <div className='h-screen bg-secondary lg:py-10 py-2'>
       <div className='flex flex-row justify-center items-center  h-full gap-[93px] px-8'>
         <div className='flex-1 hidden lg:flex max-w-[692px] justify-center'>
           <div className='w-full h-full overflow-hidden rounded-lg xl:rounded-2xl'>
@@ -121,7 +121,7 @@ function SignIn() {
             </>
           )}
           <div className='flex justify-center'>
-            <p className='font-bold text-md'
+            <p className='font-bold text-md text-white'
 
             > Don't have an account?</p>
             <p>
@@ -134,7 +134,7 @@ function SignIn() {
             </p>
           </div>
           <div className='h-[25px]' />
-          <p className='text-center text-[16px] text-slate-gray xl:pt-4'>
+          <p className='text-center text-[16px] text-slate-gray xl:pt-4 text-white'>
             ©2025 ALL RIGHTS RESERVED PrepWise@
           </p>
           <div className='h-[25px]' />
