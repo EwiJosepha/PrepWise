@@ -3,13 +3,13 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="relative z-10 bg-tetiary text-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24 px-8 md:px-14 lg:px-36">
+    <footer className="relative z-10 bg-tetiary text-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24 px-4 md:px-14">
   <div className="container grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <div className="mb-12 max-w-[360px] lg:mb-16">
+    <div className="md:mb-12 max-w-[360px] lg:mb-16">
       <Link href="/" className="mb-8 inline-block text-indigo-500 font-bold">
         Prep wise@
       </Link>
-      <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
+      <p className="md:mb-9 mb-4 text-base leading-relaxed text-body-color dark:text-body-color-dark">
         prepare accurately for your interviews
       </p>
       <div className="flex items-center">
@@ -27,7 +27,7 @@ const Footer = () => {
     </div>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div className="mb-12 lg:mb-16">
+      <div className="md:mb-12 mb-4 lg:mb-16">
         <h2 className="mb-10 text-xl font-bold text-white dark:text-white">
           Useful Links
         </h2>
@@ -35,7 +35,7 @@ const Footer = () => {
           <li>
             <Link
               href="/blog"
-              className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+              className="md:mb-4 mb-1 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
             >
               Blog
             </Link>
@@ -43,7 +43,7 @@ const Footer = () => {
           <li>
             <Link
               href="/about"
-              className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+              className="md:mb-4 mb-1  inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
             >
               About
             </Link>
@@ -51,8 +51,8 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="mb-12 lg:mb-16">
-        <h2 className="mb-10 text-xl font-bold text-white">
+      <div className="md:mb-12 mb-4 lg:mb-16">
+        <h2 className="md:mb-10 mb-4 text-xl font-bold text-white">
           Terms
         </h2>
         <ul>
@@ -75,7 +75,7 @@ const Footer = () => {
           <li>
             <Link
               href="/"
-              className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary text-white  dark:hover:text-primary"
+              className="md:mb-4 inline-block text-base text-body-color duration-300 hover:text-primary text-white  dark:hover:text-primary"
             >
               Refund Policy
             </Link>
@@ -83,7 +83,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="mb-12 lg:mb-16 flex flex-col justify-end">
+      <div className="md:mb-12 mb-4 lg:mb-16 flex flex-col justify-end">
         <h2 className="mb-10 text-xl font-bold text-white ">
           Support & Help
         </h2>
@@ -91,7 +91,7 @@ const Footer = () => {
           <li>
             <Link
               href="/contact"
-              className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary "
+              className="md:mb-4 inline-block text-base text-body-color duration-300 hover:text-primary "
             >
               Open Support Ticket
             </Link>
@@ -99,7 +99,7 @@ const Footer = () => {
           <li>
             <Link
               href="/"
-              className="mb-4 inline-block text-base text-white  duration-300 hover:text-primary "
+              className="md:mb-4 inline-block text-base text-white  duration-300 hover:text-primary "
             >
               Terms of Use
             </Link>
@@ -107,7 +107,7 @@ const Footer = () => {
           <li>
             <Link
               href="/about"
-              className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary "
+              className="md:mb-4 inline-block text-base text-body-color duration-300 hover:text-primary "
             >
               About
             </Link>
