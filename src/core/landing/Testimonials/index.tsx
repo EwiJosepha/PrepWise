@@ -1,7 +1,7 @@
 import { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
-import { TestimonialBottomSvg, TestimonialTopSvg } from "../svg-components/testimonial-svg";
+import { TestimonialBottomSvg, TestimonialTopSvg } from "@/components/svg-components/testimonial-svg";
 import faith from "@/assets/images/missfaith.jpg"
 import gmarvis from "@/assets/images/Gmarvis Sam.jpg"
 import rash from "@/assets/images/rash.jpg"

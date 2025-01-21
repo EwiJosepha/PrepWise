@@ -1,6 +1,6 @@
 import Link from "next/link";
-import HeroTopSVG from '../svg-components/hero-top-svg'
-import HeroSecBottomSVG from "../svg-components/hero-sec-bottom-svg";
+import HeroTopSVG from '@/components/svg-components/hero-top-svg'
+import HeroSecBottomSVG from "@/components/svg-components/hero-sec-bottom-svg";
 
 const Hero = () => {
   return (

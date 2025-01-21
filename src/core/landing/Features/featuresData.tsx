@@ -1,5 +1,5 @@
 import { Feature } from "@/types/feature";
-import { FeatureAuth, FeatureQualityResponse, FeatureResume, FeatureS } from "../svg-components/feature-svgs";
+import { FeatureAuth, FeatureQualityResponse, FeatureResume, FeatureS } from "@/components/svg-components/feature-svgs";
 
 const featuresData: Feature[] = [
   {

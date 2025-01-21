@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import interviewPicture from '@/assets/images/interview-prep.jpeg'
-import InterviewSuggesterSvg from '../svg-components/interview.svg';
+import InterviewSuggesterSvg from '@/components/svg-components/interview.svg';
 
 const FloatingElement = ({ delay }: {delay: number}) => (
   <motion.div

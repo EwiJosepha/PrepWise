@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../button';
+import Button from '@/components/button';
 const CallToAction = () => {
   return (
     <section className="bg-secondary-color py-16 px-4 sm:px-6 lg:px-8">
