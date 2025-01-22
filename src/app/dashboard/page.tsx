@@ -1,10 +1,9 @@
+import DashboardRoute from '@/core/dashboard-comp'
 import React from 'react'
 
 function Dashboard() {
   return (
-    <div>
-      Dashboard
-    </div>
+   <DashboardRoute />
   )
 }
 

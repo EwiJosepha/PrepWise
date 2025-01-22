@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`left-0 top-0 z-40 sticky flex flex-col w-full   bg-thick-blue`}
+        className={`left-0 top-0 z-40 sticky flex flex-col w-full`}
       >
         <div className=" flex flex-col md:px-20 px-4 w-full  justify-between bg-primary">
           <div className="relative -mx-4 flex  justify-between">
