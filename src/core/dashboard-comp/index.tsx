@@ -44,7 +44,7 @@ const Dashboard = () => {
               src={m.role === "user" ? defaultAvatar : prepAvatar}
             />
             <div style={{ width: "100%", marginLeft: "16px" }}>
-              <p className="message text-white leading-3">{m.content}</p>
+              <p className="message text-white leading-6">{m.content}</p>
               {index < messages.length - 1 && (
                 <div className="horizontal-line" />
               )}
@@ -58,7 +58,7 @@ const Dashboard = () => {
   return (
     <div ref={chatContainer} className="chat">
       {renderResponse()}
-      <form onSubmit={handleSubmit} className="chat-form w-[350px] md:w-[700px]">
+      <form onSubmit={handleSubmit} className="chat-form w-[350px] md:w-[700px] absolute bottom-8 pl-4 md:pl-0">
         <input
           name="input-field"
           type="text"

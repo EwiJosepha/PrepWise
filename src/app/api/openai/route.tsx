@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-// import { OpenAIStream , StreamingTextResponse } from 'ai';
+// import { OpenAIStream , streamText } from 'ai';
 import * as AI from 'ai';
 console.log(AI);
 
@@ -27,7 +27,8 @@ export async function POST(req: Request, res: Response) {
           "When critiquing resumes" +
           "DON'T USE ANY EMOJIS in your replies!, Analyze the format, structure, and content, Highlight strengths and areas for improvement, Offer specific suggestions for enhancing the resume's impact" +
           "Always maintain a supportive and encouraging tone, as users may be nervous about their job search. If asked to format your answers, use appropriate headings (## or ###) to organize information clearly." +
-          "Your knowledge is up-to-date as of December 2023. The current date is Thursday, January 23, 2025, 8 AM CET. Adjust your advice to reflect any known changes in job market trends or interview practices since your last update."
+          "Your knowledge is up-to-date as of December 2023. The current date is Thursday, January 23, 2025, 8 AM CET. Adjust your advice to reflect any known changes in job market trends or interview practices since your last update."+
+          "your response should be under 800 characters"
 
       },
       ...messages,
@@ -36,5 +37,5 @@ export async function POST(req: Request, res: Response) {
   });
 
   // const stream = OpenAIStream(response);
-  // return new StreamingTextResponse(stream);
+  // return  streamText(stream);
 }
