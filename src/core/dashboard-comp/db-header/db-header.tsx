@@ -1,8 +1,12 @@
+'use client'
 import React from 'react';
 import { useAppState } from '@/hooks/use-app';
 import { useDesktop } from '@/hooks/use-desktop';
-import { Bell, MenuIcon, MessageCircleCodeIcon, User } from 'lucide-react';
+import {  MenuIcon, Share} from 'lucide-react';
+import defaultImage from '@/assets/images/avatar.png'
 import Link from 'next/link';
+import Image from 'next/image';
+import { UploadIcon } from '@/components/svg-components/side-bar-svg';
 
 const HeaderDashboard: React.FC = () => {
   // const { userInfo } = useUserStore();
@@ -26,20 +30,19 @@ const HeaderDashboard: React.FC = () => {
           </>
         )}
         <Link href='/dashboard'>
-          <p className='w-[100px]  mdi:w-[150px] object-cover text-indigo-500'>Prep Wise@ </p>
+          <p className='w-[100px] md:w-[150px]  mdi:w-[150px] object-cover text-indigo-500 font-bold md:text-2xl'>Prep Wise@ </p>
         </Link>
 
         <div className='flex-grow'></div>
         <div className='w-4' />
-        <div className='flex items-center'>
-          <MessageCircleCodeIcon className='text-white w-[21px] h-[21px] mdi:w-[26px] mdi:h-[26px]' />
+        <div className='flex items-center cursor-pointer'>
+          <UploadIcon  />
           <div className='w-[18px] mdi:w-[27px]' />
-          <Bell className='text-white w-[19px] h-[16px mdi:w-[26px] mdi:h-[26px]' />
           <div className='w-[20px] mdi:w-[25px]' />
-          <Link href='/dashboard/settings' className='flex'>
-            <User  className='text-white'/>
-           <p className='text-white'>{displayName}</p>
-          </Link>
+          <div className='flex justify-center items-center'>
+            <Image src={defaultImage} alt="Avatar" width={30} height={30} />
+           <p className='text-white text-xs'>{displayName}</p>
+          </div>
         </div>
       </div>
     </header>

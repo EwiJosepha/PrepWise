@@ -1,30 +1,75 @@
 'use client'
-// import { Outlet } from 'react-router-dom';
 
-import { useDesktop } from '@/hooks/use-desktop';
+import { useChat } from "ai/react";
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import defaultAvatar from '@/assets/images/avatar.png'
+import prepAvatar from '@/assets/images/prep-avatar.jpg'
 
-import { ModalScreenProvider } from '@/contexts/modal-screen-context';
-import { DashboardSideBar } from '@/core/dashboard-comp/dashboard-sidebar/sidebar';
-import HeaderDashboard from './db-header/db-header';
+const Dashboard = () => {
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    api: "/api/openai",
+  });
 
+  const chatContainer = useRef<HTMLDivElement>(null);
 
-export default function DashboardRoute() {
-  const isDesktop = useDesktop();
+  const scroll = () => {
+    if (chatContainer.current) {
+      const { offsetHeight, scrollHeight, scrollTop } = chatContainer.current;
+      if (scrollHeight >= scrollTop + offsetHeight) {
+        chatContainer.current.scrollTo(0, scrollHeight + 200);
+      }
+    }
+  };
 
+  useEffect(() => {
+    scroll();
+  }, [messages]);
+
+  const renderResponse = () => {
+    return (
+      <div className="response">
+        {messages.map((m, index) => (
+          <div
+            key={m.id}
+            className={`chat-line ${
+              m.role === "user" ? "user-chat" : "ai-chat"
+            }`}
+          >
+            <Image
+              className="avatar"
+              alt="avatar"
+              width={40}
+              height={40}
+              src={m.role === "user" ? defaultAvatar : prepAvatar}
+            />
+            <div style={{ width: "100%", marginLeft: "16px" }}>
+              <p className="message text-white leading-3">{m.content}</p>
+              {index < messages.length - 1 && (
+                <div className="horizontal-line" />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <ModalScreenProvider>
-      <div className='flex h-screen w-screen  justify-center bg-primary'>
-       <HeaderDashboard />
-        <div className='flex justify-center items-center  w-full h-screen pt-24 max-w-[1614px] self-center fixed'>
-          <div className='flex h-full w-full md:px-[20px] flex-row'>
-            {isDesktop && <DashboardSideBar className='block' />}
-          </div>
-        </div>
-      </div>
-      {!isDesktop && (
-        <DashboardSideBar className='w-screen fixed backdrop-blur-sm backdrop-filter backdrop-brightness-100 bg-transparent top-0 bottom-0 left-0 h-full z-50' />
-      )}
-    </ModalScreenProvider>
+    <div ref={chatContainer} className="chat">
+      {renderResponse()}
+      <form onSubmit={handleSubmit} className="chat-form w-[350px] md:w-[700px]">
+        <input
+          name="input-field"
+          type="text"
+          placeholder="Paste your job here"
+          onChange={handleInputChange}
+          value={input}
+        />
+        <button type="submit" className="send-button" />
+      </form>
+    </div>
   );
-}
+};
+
+export default Dashboard;

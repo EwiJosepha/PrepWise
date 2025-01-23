@@ -1,7 +1,7 @@
 'use client'
 
-import Button from '@/components/button';
 import { useCallback } from 'react';
+import Button from '@/components/button';
 import { useModal } from '@/hooks/use-modal';
 
 
@@ -21,8 +21,8 @@ export const DashboardLogout = () => {
 
 
   return (
-    <Button variant='primary' className='w-full' >
-      <p className='text-red-wine'>{'dashboard.logout'}</p>
+    <Button variant='primary' className='w-full hover:bg-gray-800' >
+      <p className='text-red-wine'>{'Logout'}</p>
     </Button>
   );
 };

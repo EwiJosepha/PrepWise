@@ -1,10 +1,10 @@
-import DashboardRoute from '@/core/dashboard-comp'
 import React from 'react'
+import Dashboard from '@/core/dashboard-comp'
 
-function Dashboard() {
+function Dashboardd() {
   return (
-   <DashboardRoute />
+   <Dashboard />
   )
 }
 
-export default Dashboard
+export default Dashboardd
