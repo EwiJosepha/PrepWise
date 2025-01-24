@@ -1,12 +1,12 @@
 
-export async function createMessage(chat: string, role: 'user' | 'assistant', content: string) {
+export async function createMessage(messageInit: { chatId: string; role: string; content: string; createdAt: Date }) {
   try {
     const response = await fetch('/api/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ chat: chat, role, content }),
+      body: JSON.stringify(messageInit),
     });
 
     if (!response.ok) {

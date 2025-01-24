@@ -1,13 +1,22 @@
 // service/chat.ts
 
-export async function createChat(title: string, user: string) {
+import mongoose from "mongoose";
+
+export async function createChat(user: string,title: string) {
+  const objectIdRegex = /^[a-f\d]{24}$/i;
+if (!objectIdRegex.test(user)) {
+  throw new Error("Invalid user ID format.");
+}
+  const userId = new mongoose.Types.ObjectId(user)
+  console.log({userId});
+  
   try {
     const response = await fetch('/api/chats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, user }),
+      body: JSON.stringify({user: userId,  title })
     });
 
     if (!response.ok) {
