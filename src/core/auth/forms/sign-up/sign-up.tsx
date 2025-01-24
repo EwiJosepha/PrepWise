@@ -6,7 +6,7 @@ import FormControl from '../form-control'
 import image from '../../../../assets/images/sign-up-image.jpeg'
 import Button from '@/components/button'
 import Link from 'next/link'
-import { createUser } from '@/utils/api'
+import { createUser } from '@/services/user-api'
 import Toast from '@/components/notify/toast';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation'

@@ -34,9 +34,9 @@ export async function POST(request: Request) {
 
 
 
-export async function GET() {
-  await connectToDatabase();
+// export async function GET() {
+//   await connectToDatabase();
 
-  const users = await User.find();
-  return NextResponse.json(users, { status: 200 });
-}
+//   const users = await User.find();
+//   return NextResponse.json(users, { status: 200 });
+// }

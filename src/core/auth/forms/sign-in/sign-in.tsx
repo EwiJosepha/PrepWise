@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import { baseUrl } from '@/lib/constant'
-import { loginUser } from '@/utils/api'
+import { loginUser } from '@/services/user-api'
 import { useState } from 'react'
 
 
