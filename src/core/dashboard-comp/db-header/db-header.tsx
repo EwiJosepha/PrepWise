@@ -29,7 +29,7 @@ const HeaderDashboard: React.FC = () => {
             <div className='w-[12px]' />{' '}
           </>
         )}
-        <Link href='/dashboard'>
+        <Link href='/'>
           <p className='w-[100px] md:w-[150px]  mdi:w-[150px] object-cover text-indigo-500 font-bold md:text-2xl'>Prep Wise@ </p>
         </Link>
 

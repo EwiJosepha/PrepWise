@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken"
 export interface JwtPayload {
   id: string;
   email: string;
+  firstName?:string,
+  lastName?: string,
 }
 
 const JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME

@@ -12,11 +12,13 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation'
 import { baseUrl } from '@/lib/constant'
 import { useState } from 'react'
+import useUserStore from '@/store/useUserStore'
 const failed = () => toast.warn("Registration Failed")
 const notify = () => toast.success("Registration successful")
 
 
 function SignUp() {
+  const { updateUserInfo } = useUserStore.getState();
   const router = useRouter()
   const [errorMessage, setErrorMessage] = useState(''); 
   const [hasApiError, setHasApiError] = useState(false)
@@ -35,9 +37,16 @@ function SignUp() {
     try {
       setIsLoading(true)
       const data = await createUser(values);
+      updateUserInfo({
+        id: data.user._id,
+        email: data.user.email,
+        firstName: data.user.firstName,
+        lastName: data.user.lastName,
+        token: data.token,
+        isAuthenticated: true,
+      });
       notify()
       router.push(baseUrl + '/dashboard')
-      console.log('User created successfully:', data);
     } catch (error) {
       let apiErrorMessage = 'Login failed. Please try again.';
       if (error instanceof Error) {
