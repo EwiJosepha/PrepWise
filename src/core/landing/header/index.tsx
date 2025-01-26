@@ -29,11 +29,11 @@ const Header = () => {
   return (
     <>
       <header
-        className={`left-0 top-0 z-40 sticky flex flex-col w-full`}
+        className={`left-0 top-0 z-40 sticky flex flex-col w-full   bg-thick-blue`}
       >
-        <div className=" flex flex-col md:px-20 px-4 w-full  justify-between bg-primary">
-          <div className="relative -mx-4 flex  justify-between">
-            <div className="w-60 max-w-full px-4 xl:mr-12 ">
+        <div className=" flex flex-col lg:px-20 px-4 w-full  justify-between bg-primary">
+          <div className="relative -mx-4 flex items-center  justify-between">
+            <div className="lg:pl-20 xl:mr-12 px-4">
               <Link
                 href="/"
                 className={` block w-full ${sticky ? "py-5 lg:py-2" : "py-8"
@@ -42,7 +42,7 @@ const Header = () => {
                 <p className="font-bold text-blue-500 md:text-2xl">Prep Wise@</p>
               </Link>
             </div>
-            <div className="flex w-full  items-center  justify-end px-4">
+            <div className="flex  items-center justify-center lg:pr-20 px-4">
               <div>
                 <button
                   onClick={navbarToggleHandler}

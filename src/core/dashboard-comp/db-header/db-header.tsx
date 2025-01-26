@@ -2,7 +2,7 @@
 import React from 'react';
 import { useAppState } from '@/hooks/use-app';
 import { useDesktop } from '@/hooks/use-desktop';
-import {  MenuIcon, Share} from 'lucide-react';
+import {  MenuIcon } from 'lucide-react';
 import defaultImage from '@/assets/images/avatar.png'
 import Link from 'next/link';
 import Image from 'next/image';

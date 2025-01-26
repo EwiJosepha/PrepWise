@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import interviewPicture from '@/assets/images/interview-prep.jpeg'
+import interviewPicture from '@/assets/images/interview-man.jpg'
 import InterviewSuggesterSvg from '@/components/svg-components/interview.svg';
 
 const FloatingElement = ({ delay }: {delay: number}) => (
@@ -37,7 +37,7 @@ const InterviewSuggestionBox = () => {
   return (
     <div className='bg-secondary flex flex-col md:flex-row items-center justify-center  w-full border-none px-4'>
       <motion.div 
-        className="bg-gray-800 text-blue-200 p-6 rounded-lg shadow-lg w-full md:w-1/2 lg:w-2/5 relative overflow-hidden h-[400px]"
+        className="bg-gray-800 text-blue-200 p-6 rounded-lg shadow-lg w-full md:w-1/2 lg:w-2/5 relative overflow-hidden h-[600px]"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
@@ -50,7 +50,7 @@ const InterviewSuggestionBox = () => {
           <h2 className="text-2xl font-bold mb-4">Prep@ wise Suggester</h2>
           <textarea 
             className="w-full p-3 bg-gray-700 text-blue-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows={4}
+            rows={14}
             placeholder="Paste job description here..."
             onPaste={handlePaste}
           ></textarea>
@@ -82,13 +82,15 @@ const InterviewSuggestionBox = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Image
-          src={interviewPicture}
-          alt="Interview illustration"
-          width={500}
-          height={500}
-          className="rounded-lg shadow-lg w-full"
-        />
+       <div className="relative w-full h-[600px] aspect-square">
+  <Image
+    src={interviewPicture}
+    alt="Interview illustration"
+    layout="fill"
+    objectFit="cover"
+    className="rounded-lg shadow-lg"
+  />
+</div>
       </motion.div>
     </div>
   );

@@ -7,7 +7,7 @@ import CallToAction from "@/core/landing/action-call";
 
 export default function Home() {
   return (
-    <div className="bg-secondary">
+    <div>
       <Hero />
       <InterviewSuggestionBox />
       <Features/>

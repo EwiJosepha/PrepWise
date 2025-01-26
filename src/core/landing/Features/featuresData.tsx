@@ -21,13 +21,5 @@ const featuresData: Feature[] = [
     title: "Accurate Chat",
     paragraph: "Accurate Chat ensures precise and reliable communication, empowering users with trustworthy information at their fingertips. Experience seamless interactions where clarity and correctness are prioritized, making every conversation count.",
   },
-  {
-    id: 4,
-  icon: <FeatureAuth />,
-    title: "Users",
-    paragraph:
-      "Unlock the full potential of our app by creating a free account, giving you access to exclusive features and personalized experiences. Enjoy seamless functionality while ensuring your data is secure and tailored to your needs.",
-
-  },
 ];
 export default featuresData;
