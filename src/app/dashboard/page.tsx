@@ -1,11 +1,13 @@
 import React from 'react'
+import Dashboard from '@/core/dashboard-comp'
+import RequireAuth from '@/utils/require-auth'
 
-function Dashboard() {
+function Dashboardd() {
   return (
-    <div>
-      Dashboard
-    </div>
+    <RequireAuth>
+      <Dashboard />
+    </RequireAuth>
   )
 }
 
-export default Dashboard
+export default Dashboardd

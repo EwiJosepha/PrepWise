@@ -1,13 +1,13 @@
-import InterviewSuggestionBox from "@/components/interview-suggestion";
-import Features from "@/components/Features";
+import InterviewSuggestionBox from "@/core/landing/interview-suggestion";
+import Features from "@/core/landing/Features";
 import Footer from "@/components/Footer";
-import Hero from "@/components/hero-section/hero";
-import Testimonials from "@/components/Testimonials";
-import CallToAction from "@/components/action-call";
+import Hero from "@/core/landing/hero-section/hero";
+import Testimonials from "@/core/landing/Testimonials";
+import CallToAction from "@/core/landing/action-call";
 
 export default function Home() {
   return (
-    <div className="bg-secondary">
+    <div>
       <Hero />
       <InterviewSuggestionBox />
       <Features/>

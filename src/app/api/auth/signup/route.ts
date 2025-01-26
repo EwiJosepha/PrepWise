@@ -25,18 +25,12 @@ export async function POST(request: Request) {
 
   try {
     await user.save();
-    const token = AuthService.jwtSignUser({ id: user._id, email: user.email });
+    const token = AuthService.jwtSignUser({ id: user._id, email: user.email , firstName: user.firstName, lastName: user.lastName});
+    console.log({token});
+    
     return NextResponse.json({ user: { ...user.toObject(), password: undefined }, token }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to save user' }, { status: 500 });
   }
 }
 
-
-
-export async function GET() {
-  await connectToDatabase();
-
-  const users = await User.find();
-  return NextResponse.json(users, { status: 200 });
-}
