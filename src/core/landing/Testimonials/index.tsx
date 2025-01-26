@@ -10,7 +10,7 @@ const testimonialData: Testimonial[] = [
   {
     id: 1,
     name: "Faith Ngani",
-    designation: "Manager at Rebase",
+    designation: "Manager at RCC",
     content:
       "Our members are so impressed. It's intuitive. It's clean. It's distraction free.",
     image: faith,
@@ -39,7 +39,7 @@ const testimonialData: Testimonial[] = [
 const Testimonials = () => {
   return (
     <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28 bg-secondary">
-      <div className="px-4 md:px-14  ls:px-40">
+      <div className="px-4 md:px-14  ls:px-40  container">
         <SectionTitle
           title="What Our Users Say"
           paragraph="Discover the transformation power of personalized learning with Prepwis@, where we help you get hired"

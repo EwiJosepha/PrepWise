@@ -35,9 +35,10 @@ const InterviewSuggestionBox = () => {
   };
 
   return (
-    <div className='bg-secondary flex flex-col md:flex-row items-center justify-center  w-full border-none px-4'>
+    <div className='bg-secondary'>
+    <div className=' flex flex-col md:flex-row items-center justify-center  w-full border-none px-4 lg:max-w-7xl mx-auto gap-8'>
       <motion.div 
-        className="bg-gray-800 text-blue-200 p-6 rounded-lg shadow-lg w-full md:w-1/2 lg:w-2/5 relative overflow-hidden h-[600px]"
+        className="bg-gray-800 text-blue-200 p-6 rounded-lg shadow-lg w-full md:w-1/2 lg:w-2/5 relative overflow-hidden h-[500px]"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
@@ -50,7 +51,7 @@ const InterviewSuggestionBox = () => {
           <h2 className="text-2xl font-bold mb-4">Prep@ wise Suggester</h2>
           <textarea 
             className="w-full p-3 bg-gray-700 text-blue-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows={14}
+            rows={10}
             placeholder="Paste job description here..."
             onPaste={handlePaste}
           ></textarea>
@@ -82,7 +83,7 @@ const InterviewSuggestionBox = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-       <div className="relative w-full h-[600px] aspect-square">
+       <div className="relative w-full h-[500px] aspect-square">
   <Image
     src={interviewPicture}
     alt="Interview illustration"
@@ -92,6 +93,7 @@ const InterviewSuggestionBox = () => {
   />
 </div>
       </motion.div>
+    </div>
     </div>
   );
 };
