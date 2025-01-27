@@ -1,10 +1,9 @@
 'use client'
-
 import { useChat } from "ai/react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import defaultAvatar from '@/assets/images/avatar.png'
-import prepAvatar from '@/assets/images/prep-avatar.jpg'
+import defaultAvatar from '@/assets/images/avatar.png';
+import prepAvatar from '@/assets/images/prep-avatar.jpg';
 import { createChat } from "@/services/chats-api";
 import { createMessage } from "@/services/message-api";
 
@@ -41,7 +40,6 @@ const Dashboard = () => {
           setChatId(chat.id);
         } catch (err) {
           setError('Failed to initialize chat. Please try again.');
-          console.error('Error initializing chat:', err);
         }
       }
     };
@@ -63,26 +61,27 @@ const Dashboard = () => {
     e.preventDefault();
     if (chatId) {
       const userMessage = { chatId, role: 'user', content: input, createdAt: new Date() };
-      await createMessage(userMessage);      
+      await createMessage(userMessage);
     }
     handleSubmit(e);
   };
 
+  console.log({messages});
+  
   const renderResponse = () => {
     return (
-      <div className="response">
+      <div className="response md:p-[30px]">
         {messages.map((m, index) => (
           <div
             key={m.id}
-            className={`chat-line ${m.role === "user" ? "user-chat" : "ai-chat"
-              }`}
+            className={`chat-line ${m.role === "user" ? "user-chat" : "ai-chat"}`}
           >
             <Image
               className="avatar"
               alt="avatar"
               width={40}
               height={40}
-              src={m.role === "user" ? defaultAvatar : prepAvatar}
+              src={m.role === "user" ? defaultAvatar : prepAvatar} 
             />
             <div style={{ width: "100%", marginLeft: "16px" }}>
               <p className="message text-white leading-6">{m.content}</p>
@@ -99,7 +98,10 @@ const Dashboard = () => {
   return (
     <div ref={chatContainer} className="chat">
       {renderResponse()}
-      <form onSubmit={handleSubmitWithSave} className="chat-form w-[350px] md:w-[700px] absolute bottom-8 pl-4 md:pl-0">
+      <form
+        onSubmit={handleSubmitWithSave}
+        className="chat-form w-[350px] md:w-[700px] absolute bottom-8 pl-4 md:pl-0"
+      >
         <input
           name="input-field"
           type="text"
