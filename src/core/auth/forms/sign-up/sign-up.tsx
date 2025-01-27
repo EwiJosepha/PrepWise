@@ -77,7 +77,7 @@ function SignUp() {
           </div>
         </div>
         <div className='flex-1 max-w-[640px]  pt-14'>
-          <p className='font-bold text-5xl text-indigo-500 lg:pb-1 pb-10 text-center'>Prep Wise@</p>
+          <Link href={'/'} className='font-bold text-5xl text-indigo-500  pb-10 text-center'>Prep Wise@</Link>
           <Formik
             initialValues={initialValues}
             validationSchema={SignUpValidationSchema}
@@ -87,7 +87,7 @@ function SignUp() {
           >
             {({ isValid, isSubmitting, dirty }) => (
               <Form className="flex flex-col items-center">
-                <div className='w-full flex flex-col gap-[19px] pb-8'>
+                <div className='w-full flex flex-col gap-[19px] pb-8 pt-8'>
                   <div className='flex flex-col lg:gap-[31px] gap-[19px] w-full'>
                     <FormControl
                       name='firstName'
