@@ -12,7 +12,7 @@ const Hero = () => {
             <div className="w-full md:px-4">
               <div className=" md:text-center">
                 <h1
-                  className="bg-gradient-to-r  lg:mb-10 from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+                  className="bg-gradient-to-r mb-6 lg:mb-10 from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
                 >
                   Elevate Your Career Trajectory!
 
@@ -37,7 +37,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="absolute right-0 top-0 z-[-1] opacity-30 ">
+        {/* <div className="absolute right-0 top-0 z-[-1] opacity-30 ">
           <HeroTopSVG />
         </div>
         <div className="absolute left-0 top-0 z-[-1] opacity-30 ">
@@ -48,7 +48,7 @@ const Hero = () => {
         </div>
         <div className="absolute bottom-0 right-0 z-[-1] opacity-30">
           <HeroSecBottomSVG />
-        </div>
+        </div> */}
       </section>
     </>
   );
