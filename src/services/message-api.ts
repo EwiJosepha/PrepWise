@@ -8,10 +8,8 @@ export async function createMessage(messageInit: { chatId: string; role: string;
       },
       body: JSON.stringify(messageInit),
     });
-
-    if (!response.ok) {
-      console.log("message not created");
-      
+    
+    if (!response.ok) {      
       const errorData = await response.json();
       if (response.status === 400) {
         throw new Error(errorData.error || 'Invalid input. Please check your data.');
@@ -27,9 +25,9 @@ export async function createMessage(messageInit: { chatId: string; role: string;
   }
 }
 
-export async function getMessages(chat: string) {
+export async function getMessages(chatId: string) {
   try {
-    const response = await fetch(`/api/messages?chat=${chat}`, {
+    const response = await fetch(`/api/messages?chatId=${chatId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -37,6 +35,8 @@ export async function getMessages(chat: string) {
     });
 
     if (!response.ok) {
+      console.log("couldnt get messages");
+      
       const errorData = await response.json();
       throw new Error(errorData.error || 'An error occurred while fetching messages.');
     }

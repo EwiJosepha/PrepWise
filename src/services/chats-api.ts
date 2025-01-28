@@ -1,20 +1,26 @@
-// service/chat.ts
 
 import mongoose from "mongoose";
+import { IMessage } from "@/models/chats.model";
 
-export async function createChat(user: string,title: string) {
+export async function createChat(user: string, title: string, messages: IMessage[]) {
   const objectIdRegex = /^[a-f\d]{24}$/i;
-if (!objectIdRegex.test(user)) {
-  throw new Error("Invalid user ID format.");
-}
-  const userId = new mongoose.Types.ObjectId(user)  
+  if (!objectIdRegex.test(user)) {
+    throw new Error("Invalid user ID format.");
+  }
+  const userId = new mongoose.Types.ObjectId(user)
   try {
-    const response = await fetch('/api/chats', {
+    const messageIds = messages.map((msg) => {
+      if (typeof msg.id !== 'string') {
+        throw new Error(`Message ID should be a string, but got ${typeof msg.id}`);
+      }
+      return msg.id;
+    });
+      const response = await fetch('/api/chats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({user: userId,  title })
+      body: JSON.stringify({ user: userId, title, messages: messageIds })
     });
 
     if (!response.ok) {
@@ -58,10 +64,36 @@ export async function getChats(user: string) {
 const getLatestChatId = async (userId: string) => {
   try {
     const response = await fetch(`/api/chats/latest/${userId}`);
-    return  await response.json();
+    return await response.json();
   } catch (error) {
     console.error("Error fetching latest chat:", error);
     throw error;
   }
 };
 
+
+interface UpdateChatMessagesBody {
+  messages: string[];
+}
+
+export const updateChatMessages = async (chatId: string, messages: any[]) => {
+  try {
+    const response = await fetch(`/api/chat/${chatId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ messages }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update chat messages.');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error updating chat messages:', error);
+    throw new Error('Failed to update chat messages. Please try again.');
+  }
+};

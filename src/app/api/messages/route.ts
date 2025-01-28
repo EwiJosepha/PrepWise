@@ -5,9 +5,9 @@ import Message from '@/models/messages.model';
 export  async function POST(req: Request) {
   await dbConnect();
 
-  if (req.method === 'POST') {    
+  if (req.method === 'POST') {
     try {
-      const { chatId, role, content } = await req.json();
+      const { chatId , role, content } = await req.json();
       const newMessage = await Message.create({
         chatId,
         role,
@@ -24,3 +24,26 @@ export  async function POST(req: Request) {
   }
 }
 
+
+export async function GET(req: Request) {
+  await dbConnect();
+
+  try {
+    const url = new URL(req.url);
+    const userId = url.searchParams.get('user');
+    const chatId = url.searchParams.get('chatId');
+
+    let filter: any = {};
+    if (userId) {
+      filter.user = userId;
+    }
+    if (chatId) {
+      filter.chatId = chatId;
+    }
+
+    const chats = await Message.find(filter).sort({ updatedAt: -1 });    
+    return NextResponse.json({ success: true, data: chats }, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}

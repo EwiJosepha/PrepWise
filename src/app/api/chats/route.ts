@@ -7,13 +7,14 @@ export async function POST(req:Request) {
 
   if (req.method === 'POST') {
     try {
-      const { user, title } = await req.json()
+      const { user, title, messages } = await req.json()
       if (!user || !title) {
         return NextResponse.json({ error: 'Invalid input.'}, {status: 400});
       }
       const newChat = await Chat.create({
         user,
         title,
+        messages,
         createdAt: new Date(),
         updatedAt: new Date(),
         lastMessageAt: new Date()

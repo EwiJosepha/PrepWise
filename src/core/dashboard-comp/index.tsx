@@ -4,18 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import defaultAvatar from '@/assets/images/avatar.png';
 import prepAvatar from '@/assets/images/prep-avatar.jpg';
-import { createChat } from "@/services/chats-api";
-import { createMessage, getMessages } from "@/services/message-api";
+import { createChat, updateChatMessages } from "@/services/chats-api";
 import useUserStore from "@/store/useUserStore";
+import useMessages from "@/hooks/use-message";
 
 const Dashboard = () => {
   const { userInfo } = useUserStore()
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/openai",
   });
+
+  console.log({messages});
+  
   const [chatId, setChatId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const { messages: prevMessages, error: fetchError } = useMessages(chatId);
   const chatContainer = useRef<HTMLDivElement>(null);
   const scroll = () => {
     if (chatContainer.current) {
@@ -33,9 +37,9 @@ const Dashboard = () => {
   const initChat = async () => {
     if (!chatId) {
       try {
-        const title = "New Chat";
+        const title = "New from here";
         const user = userInfo.id;
-        const chat = await createChat(user!, title);
+        const chat = await createChat(user!, title, messages);
         setChatId(chat.id);
       } catch (err) {
         setError("Failed to initialize chat. Please try again.");
@@ -45,44 +49,40 @@ const Dashboard = () => {
 
   useEffect(() => {
     initChat();
-  }, [userInfo]);
+  }, [userInfo.id]);
 
+  
   const handleSubmitWithSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.clear()
+  console.log("mewww");
+  
     if (!chatId && userInfo.id) {
       try {
-        const title = "New Chat";
+        const title = "chat test";
         const user = userInfo.id;
-        const data = await createChat(user, title);
-        if(data.success){
-          const chat = data.data
-          setChatId(chat._id);  
-          const newMessage = {
-            chatId: chat._id,
-            role: 'user',
-            content: input,
-            createdAt: new Date(),
-          };
-          const msgCreated = await createMessage(newMessage);
-        }
-       
+  
+        const chat = await createChat(user, title, messages);
+        setChatId(chat.id);
       } catch (err) {
-        setError("Failed to create chat or save message. Please try again.");
+        setError("Failed to initialize chat. Please try again.");
         return;
       }
     } else if (chatId) {
-      const userMessage = {
-        chatId,
-        role: 'user',
-        content: input,
-        createdAt: new Date(),
-      };
-      const msgCreated = await createMessage(userMessage);
+      try {
+        console.log("newww");
+        
+       const neww = await updateChatMessages(chatId, messages);
+       console.log({neww});
+       
+      } catch (err) {
+        setError("Failed to update chat messages. Please try again.");
+        return;
+      }
     }
-
+  
     handleSubmit(e);
   };
+  
 
 
   const renderResponse = () => {
