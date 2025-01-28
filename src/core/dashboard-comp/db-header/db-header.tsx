@@ -7,12 +7,13 @@ import defaultImage from '@/assets/images/avatar.png'
 import Link from 'next/link';
 import Image from 'next/image';
 import { UploadIcon } from '@/components/svg-components/side-bar-svg';
+import useUserStore from '@/store/useUserStore';
 
 const HeaderDashboard: React.FC = () => {
-  // const { userInfo } = useUserStore();
+  const { userInfo } = useUserStore();
   const { state, setAppState } = useAppState();
   const { isSidebarOpen } = state;
-  const displayName = 'Josey Ewi'
+  const displayName = userInfo.firstName
   const navbarToggleHandler = () => {
     setAppState({ isSidebarOpen: !isSidebarOpen });
   };
@@ -38,7 +39,6 @@ const HeaderDashboard: React.FC = () => {
         <div className='flex items-center cursor-pointer'>
           <UploadIcon  />
           <div className='w-[18px] mdi:w-[27px]' />
-          <div className='w-[20px] mdi:w-[25px]' />
           <div className='flex justify-center items-center'>
             <Image src={defaultImage} alt="Avatar" width={30} height={30} />
            <p className='text-white text-xs'>{displayName}</p>

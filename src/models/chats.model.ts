@@ -1,5 +1,5 @@
 import mongoose, { Document, ObjectId, Schema } from 'mongoose';
-import { IMessage } from './messages.schema';
+import { IMessage } from './messages.model';
 export interface IChat extends Document {
   user: ObjectId;
   title: string;
