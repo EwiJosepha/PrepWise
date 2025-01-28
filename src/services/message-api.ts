@@ -10,6 +10,8 @@ export async function createMessage(messageInit: { chatId: string; role: string;
     });
 
     if (!response.ok) {
+      console.log("message not created");
+      
       const errorData = await response.json();
       if (response.status === 400) {
         throw new Error(errorData.error || 'Invalid input. Please check your data.');
@@ -38,8 +40,7 @@ export async function getMessages(chat: string) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'An error occurred while fetching messages.');
     }
-
-    const messages = await response.json();
+    const messages = await response.json();  
     return messages;
   } catch (error) {
     console.error('Error during fetching messages:', error);

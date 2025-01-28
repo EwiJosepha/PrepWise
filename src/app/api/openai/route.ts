@@ -20,7 +20,6 @@ export async function POST(req: Request) {
 
     return response.toDataStreamResponse();
   } catch (error: any) {
-    console.error("Error:", error);
     return new Response(
       JSON.stringify({ success: false, error: error.message || "Internal Server Error" }),
       { status: 500 }

@@ -7,9 +7,7 @@ export async function createChat(user: string,title: string) {
 if (!objectIdRegex.test(user)) {
   throw new Error("Invalid user ID format.");
 }
-  const userId = new mongoose.Types.ObjectId(user)
-  console.log({userId});
-  
+  const userId = new mongoose.Types.ObjectId(user)  
   try {
     const response = await fetch('/api/chats', {
       method: 'POST',
@@ -27,8 +25,8 @@ if (!objectIdRegex.test(user)) {
       throw new Error(errorData.error || 'An error occurred while creating the chat. Please try again.');
     }
 
-    const chat = await response.json();
-    return chat;
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error('Error during chat creation:', error);
     throw error;
@@ -56,3 +54,14 @@ export async function getChats(user: string) {
     throw error;
   }
 }
+
+const getLatestChatId = async (userId: string) => {
+  try {
+    const response = await fetch(`/api/chats/latest/${userId}`);
+    return  await response.json();
+  } catch (error) {
+    console.error("Error fetching latest chat:", error);
+    throw error;
+  }
+};
+
