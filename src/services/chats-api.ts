@@ -71,7 +71,6 @@ const getLatestChatId = async (userId: string) => {
   }
 };
 
-
 interface UpdateChatMessagesBody {
   messages: string[];
 }
