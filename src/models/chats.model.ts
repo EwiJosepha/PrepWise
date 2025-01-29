@@ -1,12 +1,20 @@
 import mongoose, { Document, ObjectId, Schema } from 'mongoose';
-import { IMessage } from './messages.model';
+
+export interface IMessage {
+  id: string;
+  experimental_attachments?: any;
+  role: 'user' | 'assistant' | 'data' | 'system';
+  content: string;
+  createdAt?: Date;
+}
+
 export interface IChat extends Document {
   user: ObjectId;
   title: string;
   createdAt: Date;
   updatedAt: Date;
   lastMessageAt: Date;
-  messages: IMessage[] | ObjectId[];
+  messages: IMessage[];
 }
 
 const ChatSchema: Schema = new Schema(
@@ -16,7 +24,7 @@ const ChatSchema: Schema = new Schema(
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     lastMessageAt: { type: Date },
-    messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }],
+    messages: [{ type: String, ref: 'Message' }]
   },
   {
     timestamps: true,
