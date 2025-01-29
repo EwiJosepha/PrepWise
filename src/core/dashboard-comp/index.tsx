@@ -17,6 +17,8 @@ const Dashboard = () => {
 
   const [chatId, setChatId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [persistedMessages, setPersistedMessages] = useState([]);
+
 
   // const { messages: prevMessages, error: fetchError } = useMessages(chatId);
   // console.log({ messages });
@@ -34,25 +36,35 @@ const Dashboard = () => {
   useEffect(() => {
     scroll();
   }, [messages]);
-
   useEffect(() => {
     const fetchChats = async () => {
       try {
         const allMsges = await getChats(userInfo.id as string);
-        console.log("Fetched Chats:", allMsges);
-
-        if (allMsges.length > 0) {
-          setChatId(allMsges[0].id); 
-        }
+        console.log("Fetched Chats:", allMsges); // Log the data before setting state
+  
+        // if (allMsges.length > 0) {
+          const messagesArray = allMsges.data?.[1]?.messages || [];
+          setPersistedMessages(messagesArray);
+          console.log("Setting persistedMessages:", messagesArray);
+            setChatId(allMsges[0].id);
+          // setPersistedMessages(allMsges[0].messages || []);
+        // }
       } catch (err) {
         setError("Failed to fetch chats.");
       }
     };
-
+  
     if (userInfo.id) {
       fetchChats();
     }
   }, [userInfo.id]);
+  
+  // Log the updated state after it changes
+  useEffect(() => {
+    console.log("Updated persistedMessages:", persistedMessages);
+  }, [persistedMessages]);
+  
+
 
   const handleSubmitWithSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,18 +101,20 @@ const Dashboard = () => {
         return;
       }
     }
-
+    setPersistedMessages([]); 
     handleSubmit(e);
   };
 
 
 
   const renderResponse = () => {
+    const displayedMessages = persistedMessages.length > 0 ? persistedMessages : messages;
+
     return (
       <div className="response md:p-[30px]">
-        {messages.map((m, index) => (
+        {displayedMessages.map((m, index) => (
           <div
-            key={m.id}
+            key={index}
             className={`chat-line ${m.role === "user" ? "user-chat" : "ai-chat"}`}
           >
             <Image
