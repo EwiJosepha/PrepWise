@@ -7,19 +7,20 @@ import prepAvatar from '@/assets/images/prep-avatar.jpg';
 import { createChat, updateChatMessages } from "@/services/chats-api";
 import useUserStore from "@/store/useUserStore";
 import useMessages from "@/hooks/use-message";
+import { getChats } from "@/services/chats-api";
 
 const Dashboard = () => {
-  const { userInfo } = useUserStore()
+  const { userInfo } = useUserStore();
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/openai",
   });
 
-  console.log({messages});
-  
   const [chatId, setChatId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const { messages: prevMessages, error: fetchError } = useMessages(chatId);
+  // const { messages: prevMessages, error: fetchError } = useMessages(chatId);
+  // console.log({ messages });
+
   const chatContainer = useRef<HTMLDivElement>(null);
   const scroll = () => {
     if (chatContainer.current) {
@@ -34,34 +35,46 @@ const Dashboard = () => {
     scroll();
   }, [messages]);
 
-  const initChat = async () => {
-    if (!chatId) {
-      try {
-        const title = "New from here";
-        const user = userInfo.id;
-        const chat = await createChat(user!, title, messages);
-        setChatId(chat.id);
-      } catch (err) {
-        setError("Failed to initialize chat. Please try again.");
-      }
-    }
-  };
-
   useEffect(() => {
-    initChat();
+    const fetchChats = async () => {
+      try {
+        const allMsges = await getChats(userInfo.id as string);
+        console.log("Fetched Chats:", allMsges);
+
+        if (allMsges.length > 0) {
+          setChatId(allMsges[0].id); 
+        }
+      } catch (err) {
+        setError("Failed to fetch chats.");
+      }
+    };
+
+    if (userInfo.id) {
+      fetchChats();
+    }
   }, [userInfo.id]);
 
-  
   const handleSubmitWithSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  console.log("mewww");
-  
+    console.log("Message submitted!");
+
     if (!chatId && userInfo.id) {
       try {
-        const title = "chat test";
+        const title = `Prep wise@ chat with ${userInfo.id}`;
         const user = userInfo.id;
-  
-        const chat = await createChat(user, title, messages);
+        const filteredMessages = messages.map(({ 
+          experimental_attachments, reasoning, data, annotations, toolInvocations, createdAt, ...msg 
+        }) => ({
+          ...msg,
+          createdAt: createdAt ?? new Date(),
+        }));
+        
+       console.log( {filteredMessages});
+       
+        const chat = await createChat(user, title, filteredMessages);
+
+        console.log({chat});
+        
         setChatId(chat.id);
       } catch (err) {
         setError("Failed to initialize chat. Please try again.");
@@ -69,20 +82,17 @@ const Dashboard = () => {
       }
     } else if (chatId) {
       try {
-        console.log("newww");
-        
-       const neww = await updateChatMessages(chatId, messages);
-       console.log({neww});
-       
+        console.log("Updating messages...");
+        await updateChatMessages(chatId, messages);
       } catch (err) {
         setError("Failed to update chat messages. Please try again.");
         return;
       }
     }
-  
+
     handleSubmit(e);
   };
-  
+
 
 
   const renderResponse = () => {

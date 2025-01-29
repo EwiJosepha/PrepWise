@@ -7,20 +7,29 @@ export async function createChat(user: string, title: string, messages: IMessage
   if (!objectIdRegex.test(user)) {
     throw new Error("Invalid user ID format.");
   }
-  const userId = new mongoose.Types.ObjectId(user)
+
+  const userId = new mongoose.Types.ObjectId(user);
+
   try {
-    const messageIds = messages.map((msg) => {
-      if (typeof msg.id !== 'string') {
-        throw new Error(`Message ID should be a string, but got ${typeof msg.id}`);
+    const formattedMessages = messages.map((msg) => {
+      if (!msg.role) {
+        throw new Error("Each message must have a role and content.");
       }
-      return msg.id;
+      return {
+        role: msg.role,
+        content: msg.content,
+        revisionId: msg.revisionId,
+        experimental_attachments: msg.experimental_attachments,
+        createdAt: msg.createdAt || new Date(),
+      };
     });
-      const response = await fetch('/api/chats', {
+
+    const response = await fetch('/api/chats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user: userId, title, messages: messageIds })
+      body: JSON.stringify({ user: userId, title, messages: formattedMessages })
     });
 
     if (!response.ok) {
@@ -39,6 +48,7 @@ export async function createChat(user: string, title: string, messages: IMessage
   }
 }
 
+
 export async function getChats(user: string) {
   try {
     const response = await fetch(`/api/chats?user=${user}`, {
@@ -52,7 +62,6 @@ export async function getChats(user: string) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'An error occurred while fetching chats.');
     }
-
     const chats = await response.json();
     return chats;
   } catch (error) {

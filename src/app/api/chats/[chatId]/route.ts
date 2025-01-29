@@ -1,50 +1,42 @@
-
 import dbConnect from '@/lib/db';
 import Chat from '@/models/chats.model';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ chatId: string }> }): Promise<NextResponse> {
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Promise<{ chatId: string }> }
+  ): Promise<NextResponse> {
   const { chatId } = await params;
-  const { messages } = await req.json();
-  
+  const { role, content } = await req.json();
 
-  if (!chatId || typeof chatId !== 'string') {
-    return NextResponse.json(
-      { success: false, error: 'Chat ID is required.' },
-      { status: 400 }
-    );
+  if (!chatId || !role || !content) {
+    return NextResponse.json({ success: false, error: 'Missing required fields.' }, { status: 400 });
   }
 
-  if (!Array.isArray(messages)) {
-    return NextResponse.json(
-      { success: false, error: 'Messages must be an array.' },
-      { status: 400 }
-    );
+  if (!['user', 'assistant'].includes(role)) {
+    return NextResponse.json({ success: false, error: 'Invalid role.' }, { status: 400 });
   }
 
   try {
     await dbConnect();
-    const chat = await Chat.findByIdAndUpdate(
-      chatId,
-      { messages },
-      { new: true }
-    ).populate('messages');
 
-    if (!chat) {
-      return NextResponse.json(
-        { success: false, error: 'Chat not found.' },
-        { status: 404 }
-      );
+    const newMessage = { role, content, createdAt: new Date() };
+
+    const updatedChat = await Chat.updateOne(
+      { _id: chatId },
+      {
+        $push: { messages: newMessage },
+        $set: { lastMessageAt: new Date() },
+      }
+    );
+
+    if (updatedChat.modifiedCount === 0) {
+      return NextResponse.json({ success: false, error: 'Chat not found.' }, { status: 404 });
     }
-    return NextResponse.json(
-      { success: true, data: chat },
-      { status: 200 }
-    );
+
+    return NextResponse.json({ success: true, data: newMessage }, { status: 201 });
   } catch (error) {
-    console.error('Error updating chat messages:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to update messages.' },
-      { status: 500 }
-    );
+    console.error('Error adding message:', error);
+    return NextResponse.json({ success: false, error: 'Failed to add message.' }, { status: 500 });
   }
-};
+}
