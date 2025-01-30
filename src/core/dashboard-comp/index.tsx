@@ -6,22 +6,20 @@ import defaultAvatar from '@/assets/images/avatar.png';
 import prepAvatar from '@/assets/images/prep-avatar.jpg';
 import { createChat, updateChatMessages } from "@/services/chats-api";
 import useUserStore from "@/store/useUserStore";
-import useMessages from "@/hooks/use-message";
 import { getChats } from "@/services/chats-api";
+import { createMessage } from "@/services/message-api";
+import { v4 as uuidv4 } from 'uuid';
+import { extractQuestions } from "@/utils/extract-question";
 
 const Dashboard = () => {
   const { userInfo } = useUserStore();
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, setInput, setMessages } = useChat({
     api: "/api/openai",
   });
 
   const [chatId, setChatId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [persistedMessages, setPersistedMessages] = useState([]);
-
-
-  // const { messages: prevMessages, error: fetchError } = useMessages(chatId);
-  // console.log({ messages });
 
   const chatContainer = useRef<HTMLDivElement>(null);
   const scroll = () => {
@@ -36,34 +34,35 @@ const Dashboard = () => {
   useEffect(() => {
     scroll();
   }, [messages]);
+
   useEffect(() => {
     const fetchChats = async () => {
       try {
         const allMsges = await getChats(userInfo.id as string);
-        console.log("Fetched Chats:", allMsges); // Log the data before setting state
-  
+        console.log("Fetched Chats:", allMsges);
+
         // if (allMsges.length > 0) {
-          const messagesArray = allMsges.data?.[1]?.messages || [];
-          setPersistedMessages(messagesArray);
-          console.log("Setting persistedMessages:", messagesArray);
-            setChatId(allMsges[0].id);
-          // setPersistedMessages(allMsges[0].messages || []);
-        // }
+        const messagesArray = allMsges.data?.[0]?.messages || [];
+        setPersistedMessages(messagesArray);
+        // setMessages(messagesArray)
+        console.log("Setting persistedMessages:", messagesArray);
+        setChatId(allMsges.data[0].id);
+        setPersistedMessages(allMsges[0].messages || []);
+
       } catch (err) {
         setError("Failed to fetch chats.");
       }
     };
-  
+
     if (userInfo.id) {
       fetchChats();
     }
   }, [userInfo.id]);
-  
-  // Log the updated state after it changes
+
   useEffect(() => {
     console.log("Updated persistedMessages:", persistedMessages);
   }, [persistedMessages]);
-  
+
 
 
   const handleSubmitWithSave = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,19 +73,13 @@ const Dashboard = () => {
       try {
         const title = `Prep wise@ chat with ${userInfo.id}`;
         const user = userInfo.id;
-        const filteredMessages = messages.map(({ 
-          experimental_attachments, reasoning, data, annotations, toolInvocations, createdAt, ...msg 
+        const filteredMessages = messages.map(({
+          experimental_attachments, reasoning, data, annotations, toolInvocations, createdAt, ...msg
         }) => ({
           ...msg,
           createdAt: createdAt ?? new Date(),
         }));
-        
-       console.log( {filteredMessages});
-       
         const chat = await createChat(user, title, filteredMessages);
-
-        console.log({chat});
-        
         setChatId(chat.id);
       } catch (err) {
         setError("Failed to initialize chat. Please try again.");
@@ -94,18 +87,41 @@ const Dashboard = () => {
       }
     } else if (chatId) {
       try {
-        console.log("Updating messages...");
         await updateChatMessages(chatId, messages);
       } catch (err) {
         setError("Failed to update chat messages. Please try again.");
         return;
       }
     }
-    setPersistedMessages([]); 
+    // setPersistedMessages([]);
     handleSubmit(e);
   };
 
+  const handleQuestionClick = async (question: string) => {
+    console.log("Fetching answer for:", question);
 
+    setInput(question);
+    // setMessages((prev) => [
+    //   ...prev,
+    //   { id: uuidv4(), role: "user", content: question, userId: userInfo.id, createdAt: new Date() },
+    // ]);
+
+    try {
+      await createMessage({
+        role: "user",
+        content: question,
+        userId: userInfo.id!,
+        createdAt: new Date(),
+      });
+
+        setTimeout(() => {
+          handleSubmit();
+        }, 100);
+
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+    }
+  };
 
   const renderResponse = () => {
     const displayedMessages = persistedMessages.length > 0 ? persistedMessages : messages;
@@ -125,10 +141,31 @@ const Dashboard = () => {
               src={m.role === "user" ? defaultAvatar : prepAvatar}
             />
             <div style={{ width: "100%", marginLeft: "16px" }}>
-              <p className="message text-white leading-6">{m.content}</p>
-              {index < messages.length - 1 && (
-                <div className="horizontal-line" />
-              )}
+              <div className="message text-white leading-6">
+                {m.role === "assistant" ? (
+                  <>p
+                    <p className="leading-6">{m.content}</p>
+                    {extractQuestions(m.content).length > 0 && (
+                 <div className="question-suggestions leading-8">
+                 {m.content.split("?").map((part, i) => (
+                   <span
+                     key={i}
+                     onClick={() => handleQuestionClick(part + (i < m.content.split("?").length - 1 ? "?" : ""))}
+                     className="cursor-pointer text-blue-400 hover:underline block"
+                   >
+                     {part.trim()}
+                   </span>
+                 ))}
+               </div>
+               
+                    )}
+                  </>
+                ) : (
+                  m.content
+                )}
+
+              </div>
+              {index < messages.length - 1 && <div className="horizontal-line" />}
             </div>
           </div>
         ))}

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
         {
           role: "system",
           content: `Analyzing job descriptions to generate relevant interview questions...
-          ...Your response should be under 800 characters.`,
+          ...Your response should be under 800 characters... remember that for every job description you generate posible interview questions and when user clicks on any f those questions you should be able to answer`,
         },
         ...messages,
       ],
