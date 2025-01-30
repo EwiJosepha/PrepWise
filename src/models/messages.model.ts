@@ -2,14 +2,14 @@ import mongoose, { Document, ObjectId, Schema } from 'mongoose';
 
 
 export interface IMessage extends Document {
-  chatId: ObjectId;
+  userId: ObjectId;
   role: 'user' | 'assistant';
   content: string;
   createdAt: Date;
 }
 
 const MessageSchema: Schema = new Schema({
-  chatId: { type: Schema.Types.ObjectId, ref: 'Chat', required: true, index: true },
+  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
   role: { type: String, enum: ['user', 'assistant'], required: true },
   content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }

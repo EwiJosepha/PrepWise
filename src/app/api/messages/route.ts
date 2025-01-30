@@ -7,9 +7,9 @@ export  async function POST(req: Request) {
 
   if (req.method === 'POST') {
     try {
-      const { chatId , role, content } = await req.json();
+      const { userId , role, content } = await req.json();
       const newMessage = await Message.create({
-        chatId,
+        userId,
         role,
         content,
         createdAt: new Date(),

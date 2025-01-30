@@ -1,5 +1,5 @@
 
-export async function createMessage(messageInit: { chatId: string; role: string; content: string; createdAt: Date }) {
+export async function createMessage(messageInit: { userId: string; role: string; content: string; createdAt: Date }) {
   try {
     const response = await fetch('/api/messages', {
       method: 'POST',
