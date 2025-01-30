@@ -44,6 +44,7 @@ const Dashboard = () => {
         // if (allMsges.length > 0) {
         const messagesArray = allMsges.data?.[0]?.messages || [];
         setPersistedMessages(messagesArray);
+        // setMessages(messagesArray)
         console.log("Setting persistedMessages:", messagesArray);
         setChatId(allMsges.data[0].id);
         setPersistedMessages(allMsges[0].messages || []);
@@ -92,7 +93,7 @@ const Dashboard = () => {
         return;
       }
     }
-    setPersistedMessages([]);
+    // setPersistedMessages([]);
     handleSubmit(e);
   };
 
@@ -100,26 +101,23 @@ const Dashboard = () => {
     console.log("Fetching answer for:", question);
 
     setInput(question);
-    setMessages((prev) => [
-      ...prev,
-      { id: uuidv4(), role: "user", content: question, userId: userInfo.id, createdAt: new Date() },
-    ]);
+    // setMessages((prev) => [
+    //   ...prev,
+    //   { id: uuidv4(), role: "user", content: question, userId: userInfo.id, createdAt: new Date() },
+    // ]);
 
     try {
-      const response = await createMessage({
+      await createMessage({
         role: "user",
         content: question,
         userId: userInfo.id!,
         createdAt: new Date(),
       });
 
-      if (response.success) {
         setTimeout(() => {
           handleSubmit();
-        }, 200);
-      } else {
-        console.error("Failed to fetch AI response:", response.error);
-      }
+        }, 100);
+
     } catch (error) {
       console.error("Error fetching AI response:", error);
     }
@@ -145,7 +143,7 @@ const Dashboard = () => {
             <div style={{ width: "100%", marginLeft: "16px" }}>
               <div className="message text-white leading-6">
                 {m.role === "assistant" ? (
-                  <>
+                  <>p
                     <p className="leading-6">{m.content}</p>
                     {extractQuestions(m.content).length > 0 && (
                  <div className="question-suggestions leading-8">
