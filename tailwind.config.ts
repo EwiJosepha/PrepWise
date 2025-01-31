@@ -18,6 +18,7 @@ export default {
         'dark-blue': '#0A112F',
         'blue-gray': '#8897AD',
         'thick-blue': "#020202",
+        'form-bg': '#E2E7ED',
       },
     },
   },
