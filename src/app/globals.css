@@ -8,8 +8,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    border: none
-
+    border: none;
   }    
 }
 
@@ -21,7 +20,7 @@ body {
 }
 
 .chat {
-  width: 700px;
+  /* width: 700px; */
   height: calc(100vh - 200px);
   margin: auto;
 }
@@ -145,7 +144,7 @@ body {
   padding-right: 30px;
 } */
 
-.chat-form input[type="text"] {
+/* .chat-form input[type="text"] {
   width: 100%;
   padding: 10px 20px;
   border-radius: 100px;
@@ -161,7 +160,7 @@ body {
   position: absolute;
   right: 40px;
   top: 5px;
-}
+} */
 
 .highlighted-text {
   background: linear-gradient(45deg, #ff8c8c, #ffe608);

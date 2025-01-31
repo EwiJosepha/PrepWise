@@ -10,6 +10,7 @@ import { getChats } from "@/services/chats-api";
 import { createMessage } from "@/services/message-api";
 import { v4 as uuidv4 } from 'uuid';
 import { extractQuestions } from "@/utils/extract-question";
+import { File } from "lucide-react";
 
 const Dashboard = () => {
   const { userInfo } = useUserStore();
@@ -114,9 +115,9 @@ const Dashboard = () => {
         createdAt: new Date(),
       });
 
-        setTimeout(() => {
-          handleSubmit();
-        }, 100);
+      setTimeout(() => {
+        handleSubmit();
+      }, 100);
 
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -127,7 +128,7 @@ const Dashboard = () => {
     const displayedMessages = persistedMessages.length > 0 ? persistedMessages : messages;
 
     return (
-      <div className="response md:p-[30px]">
+      <div className="response md:p-[30px] bg-secondary">
         {displayedMessages.map((m, index) => (
           <div
             key={index}
@@ -146,18 +147,18 @@ const Dashboard = () => {
                   <>p
                     <p className="leading-6">{m.content}</p>
                     {extractQuestions(m.content).length > 0 && (
-                 <div className="question-suggestions leading-8">
-                 {m.content.split("?").map((part, i) => (
-                   <span
-                     key={i}
-                     onClick={() => handleQuestionClick(part + (i < m.content.split("?").length - 1 ? "?" : ""))}
-                     className="cursor-pointer text-blue-400 hover:underline block"
-                   >
-                     {part.trim()}
-                   </span>
-                 ))}
-               </div>
-               
+                      <div className="question-suggestions leading-8">
+                        {m.content.split("?").map((part, i) => (
+                          <span
+                            key={i}
+                            onClick={() => handleQuestionClick(part + (i < m.content.split("?").length - 1 ? "?" : ""))}
+                            className="cursor-pointer text-blue-400 hover:underline block"
+                          >
+                            {part.trim()}
+                          </span>
+                        ))}
+                      </div>
+
                     )}
                   </>
                 ) : (
@@ -174,11 +175,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div ref={chatContainer} className="chat">
+    <div ref={chatContainer} className="chat w-[350px] md:w-[700px]">
       {renderResponse()}
       <form
         onSubmit={handleSubmitWithSave}
-        className="chat-form w-[350px] md:w-[700px] absolute bottom-8 pl-4 md:pl-0"
+        className="sm:w-full  sm:max-w-[500px] md:max-w-[700px] flex items-center relative bg-white rounded-full p-2 shadow-md mt-10"
       >
         <input
           name="input-field"
@@ -186,11 +187,25 @@ const Dashboard = () => {
           placeholder="Paste your job here"
           onChange={handleInputChange}
           value={input}
+          className="flex-1 pl-4 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
         />
-        <button type="submit" className="send-button" />
+
+        <label htmlFor="file-upload" className="absolute left-1 cursor-pointer text-gray-500 hover:text-gray-700">
+         <File />
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          className="hidden"
+        />
+        <button type="submit" className="absolute right-4 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
+          ➤
+        </button>
       </form>
     </div>
+
   );
+
 };
 
 export default Dashboard;
