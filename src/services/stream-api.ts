@@ -19,10 +19,7 @@ async function fetchStream(userMessage: string) {
     const { value, done: streamDone } = await reader.read();
     done = streamDone;
     const chunk = decoder.decode(value, { stream: true });
-    console.log(chunk);
     fullResponse += chunk;
-    // document.getElementById("output").innerText += chunk;
   }
 
-  console.log("Full response:", fullResponse);
 }
