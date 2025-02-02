@@ -54,3 +54,7 @@ export async function loginUser(values: { email: string; password: string }) {
     throw error;
   }
 }
+
+export async function logOutUser() {
+  
+}

@@ -25,9 +25,7 @@ export async function POST(request: Request) {
 
   try {
     await user.save();
-    const token = AuthService.jwtSignUser({ id: user._id, email: user.email , firstName: user.firstName, lastName: user.lastName});
-    console.log({token});
-    
+    const token = AuthService.jwtSignUser({ id: user._id, email: user.email , firstName: user.firstName, lastName: user.lastName});   
     return NextResponse.json({ user: { ...user.toObject(), password: undefined }, token }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to save user' }, { status: 500 });
