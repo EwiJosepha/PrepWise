@@ -11,12 +11,14 @@ import { useRouter } from 'next/navigation'
 import { baseUrl } from '@/lib/constant'
 import { loginUser } from '@/services/user-api'
 import { useState } from 'react'
+import useUserStore from '@/store/useUserStore'
 
 
 const failed = () => toast.warn("Sign in successful")
 const notify = () => toast.success("Registration successful")
 
 function SignIn() {
+  const { updateUserInfo } = useUserStore.getState();
   const router = useRouter()
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,13 @@ function SignIn() {
     setIsLoading(true);
     setHasApiError(false)
     try {
-      await loginUser(values);
+      const data = await loginUser(values);
+      console.log({data});
+      
+      updateUserInfo({
+        email: data.email,
+        isAuthenticated: true,
+      });
       notify()
       setIsLoading(true)
       router.push(baseUrl + '/dashboard')
@@ -145,3 +153,4 @@ function SignIn() {
 }
 
 export default SignIn;
+

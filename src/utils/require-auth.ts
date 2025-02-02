@@ -23,6 +23,7 @@ const RequireAuth: React.FC<PropsWithChildren<RequireAuthProps>> = ({
   const { isAuthenticated } = userInfo;
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     if (isAuthenticated && authRestrictedRoutes.includes(pathname)) {
       router.replace(defaultAuthRoute);
       return;
@@ -30,7 +31,7 @@ const RequireAuth: React.FC<PropsWithChildren<RequireAuthProps>> = ({
     if (!isAuthenticated && protectedRoutes.includes(pathname)) {
       router.replace(fallbackRoute);
     }
-  }, [router, pathname, isAuthenticated, fallbackRoute, protectedRoutes, authRestrictedRoutes, defaultAuthRoute]);
+  }, [pathname, isAuthenticated]);
 
   const shouldRender =
     (isAuthenticated && !authRestrictedRoutes.includes(pathname)) || 
