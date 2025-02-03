@@ -10,27 +10,19 @@ import DangerDialog from '@/components/modals/danger';
 export const DashboardLogout = () => {
   const { logout } = useUserStore();
   const { showModal, hideModal } = useModal();
-  const [modal, setModal] = useState(false);
 
   const onCancel = useCallback(() => {
     hideModal();
-    setModal(false);
-  }, [modal]);
+  }, [hideModal]);
 
   const handleLogout = useCallback(async () => {
-    setModal(true);
-    logout();
+    await logout();
     if (typeof window !== 'undefined') {
       localStorage.clear();
     }
-    console.log(modal);
-    return Promise.resolve();
-    
-  }, [logout, modal]);
+  }, [logout]);
 
   const startLogout = useCallback(() => {
-    setModal(true);
-
     showModal(
       <DangerDialog
         title="Logout"
@@ -41,9 +33,7 @@ export const DashboardLogout = () => {
         onAction={handleLogout}
       />
     );
-    console.log(modal);
-    
-  }, [showModal, handleLogout, modal]);
+  }, [showModal, handleLogout, onCancel]);
 
   return (
     <Button variant="primary" className="w-full hover:bg-gray-800" onClick={startLogout}>
