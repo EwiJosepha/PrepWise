@@ -41,7 +41,7 @@ export default function DangerDialog({
         className
       )}
     >
-      <div className='w-[132px] h-[132px] bg-soft-ruby-red flex items-center justify-center mt-[55px]  rounded-full'>
+      <div className='w-[132px] h-[132px] bg-soft-ruby-red flex items-center justify-center mt-[55px] bg-indigo-800  rounded-full'>
         <div className='w-[68px] h-[68px] rounded-full bg-red-wine items-center justify-center flex text-white'>
           {icon}
         </div>

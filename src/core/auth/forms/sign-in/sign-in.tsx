@@ -30,13 +30,12 @@ function SignIn() {
     password: "",
   }
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: any, {setSubmitting}: any) => {
     setIsLoading(true);
+    setErrorMessage('')
     setHasApiError(false)
     try {
-      const data = await loginUser(values);
-      console.log({data});
-      
+      const data = await loginUser(values);      
       updateUserInfo({
         email: data.email,
         isAuthenticated: true,
@@ -56,6 +55,8 @@ function SignIn() {
       failed();
     } finally{
       setIsLoading(false)
+      setSubmitting(false)
+      
     }
   }
 
@@ -110,7 +111,7 @@ function SignIn() {
                   variant='primary'
                   type='submit'
                   size='large'
-                  disabled={!isValid || !dirty || isSubmitting || isLoading || hasApiError}
+                  disabled={!isValid || !dirty || isSubmitting}
                   isLoading={isLoading}
                   className={`w-full rounded cursor-pointer ${!isSubmitting ? 'cursor-not-allowed' : ''}`}
                 >

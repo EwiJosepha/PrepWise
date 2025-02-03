@@ -31,21 +31,20 @@ const ModalProvider = ({ children }: ModalProviderProps) => {
     visible: false,
   });
 
-  const [modalContent, setModalContent] = useState<React.ReactNode>();
+  const [modalContent, setModalContent] = useState<React.ReactNode>(null);
 
   const showModal = useCallback(
     (body: React.ReactNode) => {
-      setState({ ...state, visible: true });
-      if (body) {
-        setModalContent(body);
-      }
+      setState((prevState) => ({ ...prevState, visible: true }));
+      setModalContent(() => body);
     },
-    [state]
+    []
   );
-
+  
   const hideModal = useCallback(() => {
-    setState({ ...state, visible: false });
-  }, [state]);
+    setState((prevState) => ({ ...prevState, visible: false }));
+    setModalContent(null);
+  }, []);
 
   return (
     <Provider
