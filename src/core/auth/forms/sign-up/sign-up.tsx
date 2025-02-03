@@ -32,8 +32,11 @@ function SignUp() {
     confirmPassword: ""
   }
 
-  const onSubmit = async (values: any, { resetForm }: { resetForm: () => void }) => {
+  const onSubmit = async (  values: any,
+    { resetForm, setSubmitting }: { resetForm: () => void; setSubmitting: (isSubmitting: boolean) => void }
+  ) => {
     resetForm();
+    setErrorMessage('')
     try {
       setIsLoading(true)
       const data = await createUser(values);
@@ -59,6 +62,7 @@ function SignUp() {
       failed();
     }finally {
       setIsLoading(false)
+      setSubmitting(false)
     }
   }
 
@@ -138,7 +142,7 @@ function SignUp() {
                   type='submit'
                   size='large'
                   isLoading={isLoading}
-                  disabled={!isValid || !dirty || isSubmitting || isLoading || hasApiError}
+                  disabled={!isValid || !dirty || isSubmitting}
                   className={`w-full rounded cursor-pointer ${!isSubmitting ? 'cursor-not-allowed' : ''}`}
 
                 >
