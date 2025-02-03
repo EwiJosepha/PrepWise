@@ -61,8 +61,8 @@ const Modal: React.FC<ModalProps> = ({
         animate={{ opacity: 1, height: '100vh', width: '100vw' }}
         exit={{ opacity: 0, height: 0, width: 0 }}
         className={cn(
-          `fixed h-full w-full top-0 left-0 z-50 flex items-center justify-center`,
-          'overflow-x-hidden overflow-y-visible backdrop-blur-sm backdrop-filter backdrop-brightness-50',
+          `fixed h-full w-full top-0 left-0 z-[55] flex items-center justify-center`,
+          'overflow-x-hidden overflow-y-visible backdrop-blur-sm backdrop-filter backdrop-brightness-100',
           className
         )}
       >

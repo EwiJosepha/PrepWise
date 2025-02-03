@@ -50,7 +50,7 @@ const ModalProvider = ({ children }: ModalProviderProps) => {
     <Provider
       value={{ visible: state.visible, showModal, hideModal, modalContent }}
     >
-      <Modal onClose={hideModal} show={state.visible} className='z-[55] bg-white'>
+      <Modal onClose={hideModal} show={state.visible} className='z-[55]'>
         {modalContent}
       </Modal>
       {children}

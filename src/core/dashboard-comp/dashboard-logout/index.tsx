@@ -26,10 +26,11 @@ export const DashboardLogout = () => {
     showModal(
       <DangerDialog
         title="Logout"
-        description="Do you really want to logout?"
+        description="
+        Do you really want to log out?"
         onCancel={onCancel}
         close="Confirm"
-        icon={<LogOut className="text-white h-[60px] w-[60px]" />}
+        icon={<LogOut className="rounded-full p-4 h-[60px] w-[60px] bg-indigo-500" />}
         onAction={handleLogout}
       />
     );
