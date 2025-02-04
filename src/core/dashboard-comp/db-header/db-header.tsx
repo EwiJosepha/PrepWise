@@ -1,13 +1,15 @@
 'use client'
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useAppState } from '@/hooks/use-app';
 import { useDesktop } from '@/hooks/use-desktop';
-import {  MenuIcon } from 'lucide-react';
+import {  MenuIcon, Upload } from 'lucide-react';
 import defaultImage from '@/assets/images/avatar.png'
 import Link from 'next/link';
 import Image from 'next/image';
 import { UploadIcon } from '@/components/svg-components/side-bar-svg';
 import useUserStore from '@/store/useUserStore';
+import { useModal } from '@/hooks/use-modal';
+import DangerDialog from '@/components/modals/danger';
 
 const HeaderDashboard: React.FC = () => {
   const { userInfo } = useUserStore();
@@ -18,6 +20,31 @@ const HeaderDashboard: React.FC = () => {
     setAppState({ isSidebarOpen: !isSidebarOpen });
   };
   const isDesktop = useDesktop();
+  const {showModal, hideModal} = useModal()
+
+    const onCancel = useCallback(() => {
+      hideModal();
+    }, [hideModal]);
+
+    const handleUpload = () => {
+      console.log('upload');
+      return Promise.resolve()
+    }
+  function uploadProfile () {
+    showModal(
+      <DangerDialog
+        title="Logout"
+        description="
+        Do you really want to log out?"
+        onCancel={onCancel}
+        close="Confirm"
+        icon={<Upload  className="rounded-full p-4 h-[60px] w-[60px] bg-indigo-500" />}
+        onAction={handleUpload}
+      />
+    );
+  }
+
+  
 
   return (
     <header className='fixed top-0 left-0 right-0 bg-primary flex overflow-hidden items-center z-40 shadow-md justify-center h-16'>
@@ -40,7 +67,7 @@ const HeaderDashboard: React.FC = () => {
           <UploadIcon  />
           <div className='w-[18px] mdi:w-[27px]' />
           <div className='flex justify-center items-center'>
-            <Image src={defaultImage} alt="Avatar" width={30} height={30} />
+            <Image src={defaultImage} alt="Avatar" width={30} height={30}  onClick={uploadProfile}/>
            <p className='text-white text-xs'>{displayName}</p>
           </div>
         </div>
