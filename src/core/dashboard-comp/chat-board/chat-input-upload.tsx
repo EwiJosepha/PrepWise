@@ -1,10 +1,24 @@
+import CVUploader from "@/components/modals/upload";
+import { useModal } from "@/hooks/use-modal";
 import { Paperclip } from "lucide-react";
+import { useCallback } from "react";
 
-const ChatInput = ({ input, onInputChange, onSubmit }: { input: string; onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void }) => {
+const  ChatInput = ({ input, onInputChange, onSubmit }: { input: string; onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void }) => {
 
-  function handleResume() {
-    return 'clicked'
+  const { showModal, hideModal } = useModal();
+
+  const onCancel = useCallback(() => {
+    hideModal();
+  }, [hideModal]);
+
+
+  function handleUpload () {
+  showModal(
+    <CVUploader />
+  )
+
   }
+
   return (
     <form
       onSubmit={onSubmit}
@@ -14,7 +28,7 @@ const ChatInput = ({ input, onInputChange, onSubmit }: { input: string; onInputC
         <label htmlFor="file-upload" className=" cursor-pointer text-gray-500 hover:text-gray-700">
           <Paperclip className="" />
         </label>
-        <input id="file-upload" type="file" className="hidden" onClick={handleResume} />
+        <input id="file-upload" type="file" className="hidden" onClick={handleUpload} />
       </div>
       <div className=" relative flex flex-col w-full items-center justify-center">
         <input
