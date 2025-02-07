@@ -15,7 +15,7 @@ function  CVUploader () {
 
     const res = await fetch('/api/uploads', { method: 'POST', body: formData });
     const data = await res.json();
-    // console.log({data});
+    console.log({data});
     
 
     if (data.filePath) {
@@ -28,12 +28,12 @@ function  CVUploader () {
       });
 
       const processData = await processRes.json();
-      // console.log("processdata", processData);
+      console.log("processdata", processData);
       
       setSummary(processData.summary);
     }
 
-    // console.log({summary});
+    console.log({summary});
     
   };
 
