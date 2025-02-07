@@ -50,28 +50,46 @@ export async function POST(req: NextRequest) {
       assistant_id: assistant.id,
     });
 
+    console.log({run: run.assistant_id});
+    
+
     const res = {
       message: "File processing started. Check status later.",
       threadId: thread.id,
     };
 
+    console.log({res});
+    
+
     if (!res.threadId) {
       return NextResponse.json({ error: "Missing threadId" }, { status: 400 });
     }
 
-    const messages = await openai.beta.threads.messages.list(thread.id);
-    const extractedText = messages.data.map(msg => {
-      console.log("Message content:", msg.content);
-      if (typeof msg.content === "string") {
-        return msg.content;
-      } else {
-        return JSON.stringify(msg.content);
-      }
-    }).join("\n");
+    let runStatus;
+do {
+  await new Promise(res => setTimeout(res, 2000)); // Wait 2 seconds
+  runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+} while (runStatus.status !== "completed");
 
-    console.log(extractedText);
+const messages = await openai.beta.threads.messages.list(thread.id);
 
-    return NextResponse.json({ extractedText });
+    // const messages = await openai.beta.threads.messages.list(thread.id);
+    // const extractedText = messages.data.map(msg => {
+    //   console.log("Message content:", msg.content);
+    //   if (typeof msg.content === "string") {
+    //     return msg.content;
+    //   } else {
+    //     console.log(msg);
+        
+    //     return JSON.stringify(msg.content);
+    //   }
+    // }).join("\n");
+
+    // console.log(extractedText);
+    console.log({message});
+    
+
+    return NextResponse.json({ messages });
 
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
