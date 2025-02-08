@@ -29,11 +29,12 @@ function  CVUploader () {
 
       const processData = await processRes.json();
       console.log("processdata", processData);
+      // const message = processData.data[0]
       
       setSummary(processData.summary);
+      // console.log({message});
     }
 
-    console.log({summary});
     
   };
 

@@ -73,19 +73,15 @@ do {
 
 const messages = await openai.beta.threads.messages.list(thread.id);
 
-    // const messages = await openai.beta.threads.messages.list(thread.id);
-    // const extractedText = messages.data.map(msg => {
-    //   console.log("Message content:", msg.content);
-    //   if (typeof msg.content === "string") {
-    //     return msg.content;
-    //   } else {
-    //     console.log(msg);
-        
-    //     return JSON.stringify(msg.content);
-    //   }
-    // }).join("\n");
+const latestMessage = messages.data[1]
 
-    // console.log(extractedText);
+// if (latestMessage && latestMessage.content) {
+//   const extractedText = latestMessage.content.map((item: any) => {
+//     return item.text?.value || "";
+//   }).join("\n");
+
+//   console.log("Extracted Text:", extractedText);
+// }
     console.log({message});
     
 
