@@ -28,8 +28,8 @@ function  CVUploader () {
       });
 
       const processData = await processRes.json();
-      console.log("processdata", processData);
-      // const message = processData.data[0]
+      const content = processData.content
+    
       
       setSummary(processData.summary);
       // console.log({message});

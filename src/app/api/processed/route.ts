@@ -73,7 +73,7 @@ do {
 
 const messages = await openai.beta.threads.messages.list(thread.id);
 
-const latestMessage = messages.data[1]
+const latestMessage = messages.data[0]
 
 // if (latestMessage && latestMessage.content) {
 //   const extractedText = latestMessage.content.map((item: any) => {
@@ -82,10 +82,10 @@ const latestMessage = messages.data[1]
 
 //   console.log("Extracted Text:", extractedText);
 // }
-    console.log({message});
+    console.log({latestMessage});
     
 
-    return NextResponse.json({ messages });
+    return NextResponse.json({latestMessage });
 
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });

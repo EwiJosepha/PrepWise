@@ -18,7 +18,7 @@ const failed = () => toast.warn("Sign in successful")
 const notify = () => toast.success("Registration successful")
 
 function SignIn() {
-  const { updateUserInfo } = useUserStore.getState();
+  const { updateUserInfo, fetchUserDetails } = useUserStore.getState();
   const router = useRouter()
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -30,16 +30,17 @@ function SignIn() {
     password: "",
   }
 
-  const onSubmit = async (values: any, {setSubmitting}: any) => {
+  const onSubmit = async (values: any, { setSubmitting }: any) => {
     setIsLoading(true);
     setErrorMessage('')
     setHasApiError(false)
     try {
-      const data = await loginUser(values);      
+      const data = await loginUser(values);
       updateUserInfo({
         email: data.email,
         isAuthenticated: true,
       });
+     const updtuser = await fetchUserDetails(data.email);
       notify()
       setIsLoading(true)
       router.push(baseUrl + '/dashboard')
@@ -53,10 +54,10 @@ function SignIn() {
       setHasApiError(true)
       setErrorMessage(apiErrorMessage);
       failed();
-    } finally{
+    } finally {
       setIsLoading(false)
       setSubmitting(false)
-      
+
     }
   }
 
@@ -83,7 +84,7 @@ function SignIn() {
             validateOnMount
 
           >
-            {({ isSubmitting, isValid, dirty,  }) => (
+            {({ isSubmitting, isValid, dirty, }) => (
               <Form className="flex flex-col items-center">
                 <div className='w-full flex flex-col gap-[19px] pb-8'>
                   <div className='flex flex-col lg:gap-[31px] gap-[19px]'>
