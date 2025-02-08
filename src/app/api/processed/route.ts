@@ -72,20 +72,14 @@ do {
 } while (runStatus.status !== "completed");
 
 const messages = await openai.beta.threads.messages.list(thread.id);
-
 const latestMessage = messages.data[0]
+const textContent = latestMessage?.content.find(
+  (item: any) => item.type === "text"
+) as { text?: { value: string } } | undefined;
 
-// if (latestMessage && latestMessage.content) {
-//   const extractedText = latestMessage.content.map((item: any) => {
-//     return item.text?.value || "";
-//   }).join("\n");
+const extractedText = textContent?.text?.value || "No text found.";
 
-//   console.log("Extracted Text:", extractedText);
-// }
-    console.log({latestMessage});
-    
-
-    return NextResponse.json({latestMessage });
+return NextResponse.json({ extractedText });
 
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
