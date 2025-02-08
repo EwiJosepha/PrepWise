@@ -3,8 +3,13 @@ import { useModal } from "@/hooks/use-modal";
 import { Paperclip } from "lucide-react";
 import { useCallback } from "react";
 
-const  ChatInput = ({ input, onInputChange, onSubmit }: { input: string; onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void }) => {
+interface ChatInputProps {
+  input: string;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
 
+const ChatInput = ({ input, onInputChange, onSubmit }: ChatInputProps) => {
   const { showModal, hideModal } = useModal();
 
   const onCancel = useCallback(() => {
@@ -14,7 +19,7 @@ const  ChatInput = ({ input, onInputChange, onSubmit }: { input: string; onInput
 
   function handleUpload () {
   showModal(
-    <CVUploader />
+    <CVUploader closeModal={onCancel} setInput={(input: string) => onInputChange({ target: { value: input } } as React.ChangeEvent<HTMLInputElement>)} />
   )
 
   }

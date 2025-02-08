@@ -11,8 +11,7 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content: `Analyzing job descriptions to generate relevant interview questions...
-          ...Your response should be under 800 characters... remember that for every job description you generate posible interview questions and when user clicks on any f those questions you should be able to answer`,
+          content: `Analyze the provided job description and resume to generate relevant interview questions and offer personalized resume optimization tips. Based on the job description, create a list of possible interview questions, and for each question, suggest ways the user can improve their resume to better align with the job role. Ensure the response stays under 800 characters. When the user clicks on a question, provide an answer that incorporates key insights from the job description. Additionally, highlight areas in the resume where the user can enhance their qualifications, skills, or experience to match the job requirements more closely.`,
         },
         ...messages,
       ],

@@ -72,24 +72,14 @@ do {
 } while (runStatus.status !== "completed");
 
 const messages = await openai.beta.threads.messages.list(thread.id);
+const latestMessage = messages.data[0]
+const textContent = latestMessage?.content.find(
+  (item: any) => item.type === "text"
+) as { text?: { value: string } } | undefined;
 
-    // const messages = await openai.beta.threads.messages.list(thread.id);
-    // const extractedText = messages.data.map(msg => {
-    //   console.log("Message content:", msg.content);
-    //   if (typeof msg.content === "string") {
-    //     return msg.content;
-    //   } else {
-    //     console.log(msg);
-        
-    //     return JSON.stringify(msg.content);
-    //   }
-    // }).join("\n");
+const extractedText = textContent?.text?.value || "No text found.";
 
-    // console.log(extractedText);
-    console.log({message});
-    
-
-    return NextResponse.json({ messages });
+return NextResponse.json({ extractedText });
 
   } catch (error: any) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });

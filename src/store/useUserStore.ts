@@ -13,6 +13,7 @@ interface UserInfo {
 interface UserState {
   userInfo: UserInfo;
   updateUserInfo: (userInfo: Partial<UserInfo>) => void;
+  fetchUserDetails: (email: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -29,10 +30,34 @@ const useUserStore = create<UserState>()(
   persist(
     (set) => ({
       userInfo: initialUserInfo,
+
       updateUserInfo: (userInfo) =>
         set((state) => ({
           userInfo: { ...state.userInfo, ...userInfo },
         })),
+
+        fetchUserDetails: async (email) => {
+          try {
+            const response = await fetch(`/api/auth/get-user?email=${email}`);
+            if (!response.ok) throw new Error('Failed to fetch user details');
+        
+            const data = await response.json();
+        
+            set((state) => ({
+              userInfo: {
+                ...state.userInfo,
+                id: data._id,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                isAuthenticated: true,
+              },
+            }));
+          } catch (error) {
+          }
+        }
+        ,
+        
+
       logout: () =>
         set(() => ({
           userInfo: initialUserInfo,

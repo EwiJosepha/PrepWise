@@ -1,9 +1,16 @@
 
 'use client'
 
+import { useChat } from 'ai/react';
 import { useState } from 'react';
+interface CVUploaderProps {
+  closeModal: () => void;
+  setInput: (input: string) => void;}
 
-function  CVUploader () {
+const CVUploader = ({ closeModal, setInput }: CVUploaderProps) => {
+  // const { setInput, input } = useChat({
+  //   api: "/api/processed",
+  // });
   const [file, setFile] = useState<File | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
 
@@ -15,12 +22,11 @@ function  CVUploader () {
 
     const res = await fetch('/api/uploads', { method: 'POST', body: formData });
     const data = await res.json();
-    console.log({data});
-    
+    console.log({ data });
 
     if (data.filePath) {
       console.log('clicked');
-      
+
       const processRes = await fetch('/api/processed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,13 +34,15 @@ function  CVUploader () {
       });
 
       const processData = await processRes.json();
+      const extracted = processData.extractedText;
       console.log("processdata", processData);
-      
-      setSummary(processData.summary);
+      setInput(extracted);
+      setSummary(extracted);
     }
-
-    console.log({summary});
+    // console.log({input});
     
+
+    closeModal();
   };
 
   return (
@@ -49,3 +57,4 @@ function  CVUploader () {
 };
 
 export default CVUploader;
+
