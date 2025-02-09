@@ -30,12 +30,6 @@ const Dashboard = () => {
     scroll();
   }, [messages]);
 
-  console.log({messages});
-
-  console.log({persistedMessages});
-  
-  
-
   const handleSubmitWithSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

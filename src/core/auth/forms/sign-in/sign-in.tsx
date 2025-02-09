@@ -40,7 +40,7 @@ function SignIn() {
         email: data.email,
         isAuthenticated: true,
       });
-     const updtuser = await fetchUserDetails(data.email);
+     await fetchUserDetails(data.email);
       notify()
       setIsLoading(true)
       router.push(baseUrl + '/dashboard')
