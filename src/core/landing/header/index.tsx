@@ -30,7 +30,7 @@ const Header = () => {
         className={`bg-blue w-screen sticky top-0 left-0
              right-0 z-40 shadow-lg bg-primary`}
       >
-        <div className="container mx-auto justify-between px-4 lg:max-w-7xl items-center flex h-16">
+        <div className="container mx-auto justify-between px-4 lg:max-w-7xl items-center flex h-16 md:h-24">
           {/* <div className="relative -mx-4 flex items-center  justify-between"> */}
             <div className="flex items-center justify-between py-3 md:py-5 md:block max-w-full">
               <Link
@@ -98,10 +98,10 @@ const Header = () => {
                 >
                   Sign In
                 </Link>
-                <div className="inline-block  rounded-sm bg-black px-4 py-3 m:px-8 text-base font-semibold text-white duration-300 ease-in-out hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5">
+                <div className="inline-block  rounded-sm bg-indigo-500 px-4 py-1 m:px-8 text-base font-semibold text-white duration-300 ease-in-out hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5">
                 <Link
                   href="/sign-up"
-                  className=" px-4 py-3 top-[40px] m:px-7 text-base font-medium text-dark hover:opacity-70 text-white dark:text-white md:block"
+                  className=" px-4 py-[12px] top-[40px] m:px-7 text-base font-medium text-dark hover:opacity-70 text-white dark:text-white md:block md:font-bold"
                 >
                   Sign Up
                 </Link>

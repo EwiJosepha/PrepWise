@@ -1,11 +1,10 @@
 import Link from "next/link";
-import HeroTopSVG from '@/components/svg-components/hero-top-svg'
-import HeroSecBottomSVG from "@/components/svg-components/hero-sec-bottom-svg";
+
 
 const Hero = () => {
   return (
     <>
-      <section className="relative z-10 min-h-[800px] w-full flex items-center justify-center bg-secondary"
+      <section className="relative z-10 h-[800px] md:h-[500px] w-full flex items-center justify-center bg-secondary"
       >
         <div className=" md:p-8 p-4 rounded-md">
           <div className="flex flex-wrap">
