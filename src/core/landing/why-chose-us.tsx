@@ -1,4 +1,4 @@
-import Image from "next/image";
+import React from "react";
 
 function WhyChooseUs() {
   return (
@@ -26,25 +26,19 @@ function WhyChooseUs() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="overflow-hidden rounded-xl shadow-lg">
-            <video
-              className="w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              <source src="/video" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+        <div className="relative overflow-hidden rounded-xl shadow-lg">
+          <div className="relative w-full pb-[56.25%]">
+            <iframe
+              src="https://www.loom.com/embed/772a56835d484e8e864f69207be2a063?sid=3e954d71-fed6-4575-b2bd-a227db392489&mute=true"
+              frameBorder="0"
+              allowFullScreen
+              className="absolute top-0 left-0 w-full h-full rounded-xl"
+            ></iframe>
           </div>
-          
-          <div className="absolute inset-0 bg-black bg-opacity-30 rounded-xl"></div>
         </div>
       </div>
     </section>
   );
 }
 
-export default WhyChooseUs
+export default WhyChooseUs;

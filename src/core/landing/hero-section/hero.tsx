@@ -4,7 +4,7 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <>
-      <section className="relative z-10 h-[800px] md:h-[500px] w-full flex items-center justify-center bg-secondary"
+      <section className="relative z-10 h-[800px] lg:h-[500px] w-full flex items-center justify-center bg-secondary"
       >
         <div className=" md:p-8 p-4 rounded-md">
           <div className="flex flex-wrap">
@@ -18,7 +18,7 @@ const Hero = () => {
                   <span className="sm:block mt-4"> Your Interview, Your Breakthrough. </span>
                 </h1>
                 <p className="text-center mb-6 text-base leading-relaxed text-white sm:text-lg md:text-xl"> Our platform is designed for <span className="font-bold text-yellow-300">job seekers and professionals</span> looking to enhance their interview skills. </p> <p className="text-center mb-6 text-base leading-relaxed text-white sm:text-lg md:text-xl"> This application allows users to <span className="italic text-green-300">copy job descriptions</span> and receive tailored preparation materials. </p> <p className="text-center mb-6 text-base leading-relaxed text-white sm:text-lg md:text-xl"> We provide <span className="underline text-blue-300">personalized interview questions</span> to help you prepare effectively. </p> <p className="text-center mb-12 text-base leading-relaxed text-white sm:text-lg md:text-xl"> Additionally, our platform offers <span className="font-semibold text-pink-300">expert resume feedback</span> to improve your chances of landing that dream job. </p>
-                <div className="flex gap-4 md:gap-6 items-center justify-center space-y-4 sm:flex-row  sm:space-y-0  mb-6 md:mb-0">
+                <div className="flex-col flex   md:flex gap-4 md:gap-6 items-center justify-center space-y-4 sm:flex-row  sm:space-y-0  mb-6 md:mb-0">
                   <Link
                     href="/sign-up"
                     className="rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
