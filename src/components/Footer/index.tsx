@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="relative z-10 bg-tetiary text-white pt-16 dark:bg-gray-dark md:pt-20 lg:pt-24 px-4">
     {/* Main Footer Content */}
-    <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="md:mb-12 max-w-[360px] lg:mb-16">
         <Link href="/" className="mb-8 inline-block text-indigo-500 font-bold">
           PrepWise@
@@ -23,7 +23,6 @@ const Footer = () => {
           >
             {/* Social Media Icon */}
           </a>
-          {/* Repeat for other social icons */}
         </div>
       </div>
   

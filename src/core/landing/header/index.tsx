@@ -30,8 +30,7 @@ const Header = () => {
         className={`bg-blue w-screen sticky top-0 left-0
              right-0 z-40 shadow-lg bg-primary`}
       >
-        <div className="container mx-auto justify-between px-4 lg:max-w-7xl items-center flex h-16 md:h-24">
-          {/* <div className="relative -mx-4 flex items-center  justify-between"> */}
+        <div className="max-w-7xl  justify-between px-4 mx-auto items-center flex h-16 md:h-24">
             <div className="flex items-center justify-between py-3 md:py-5 md:block max-w-full">
               <Link
                 href="/"
@@ -41,7 +40,7 @@ const Header = () => {
                 <p className="font-bold  md:text-2xl text-indigo-500">Prep Wise@</p>
               </Link>
             </div>
-            <div className="flex flex-1 md:justify-end lg:pr-20 px-4">
+            <div className="flex">
               <div>
                 <button
                   onClick={navbarToggleHandler}

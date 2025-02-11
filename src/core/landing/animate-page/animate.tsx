@@ -2,17 +2,26 @@
 'use client'
 import { motion } from "framer-motion";
 
-const WalkingAnimation = () => {
-  return (
-    <motion.div
-      initial={{ x: "-100%" }}
-      animate={{ x: "100%" }}
-      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className="left-0 text-3xl text-white"
-    >
-      🚶‍♂️Prepare for your dream job interview by signup with Prep wise@ !!!  🚶‍♂️
-    </motion.div>
-  );
-};
 
-export default WalkingAnimation;
+export default function WalkingAnimation() {
+  return (
+    <div className="relative w-full h-[100px] bg-white overflow-hidden flex items-center">
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{ x: "100%" }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        className="absolute text-xl font-bold  pb-10"
+      >
+        🚀 Ace your next interview with **Prep Wise** – The ultimate AI coach! 🚀
+      </motion.div>
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: "-100%" }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        className="absolute text-xl font-bold text-blue-900  pt-10"
+      >
+        🎯 Get expert insights & practice tailored questions – Join **Prep Wise** today! 🎯
+      </motion.div>
+    </div>
+  );
+}

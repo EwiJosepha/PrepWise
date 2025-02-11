@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'tetiary'| 'outline';
   size?: 'small' | 'medium' | 'large';
   isLoading?: boolean;
   isButtonDisabled?: boolean;
@@ -21,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   const variants = {
     primary: 'bg-indigo-900 text-white hover:bg-blue-900',
     secondary: 'bg-primary text-gray-800 hover:bg-red-800',
+    tetiary:'bg-gray-300',
     outline: 'bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-50'
   };
   
