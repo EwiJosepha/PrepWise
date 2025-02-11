@@ -12,7 +12,7 @@ const testimonialData: Testimonial[] = [
     name: "Faith Ngani",
     designation: "Manager at RCC",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free.",
+      "PrepWise helped me feel confident in my interviews! The AI feedback was spot on, and I finally landed my dream role in marketing. Highly recommend",
     image: faith,
     star: 5,
   },
@@ -21,7 +21,7 @@ const testimonialData: Testimonial[] = [
     name: "Gmarvis Sam",
     designation: "Developer",
     content:
-      "As a developer, I appreciate how intuitive and efficient this app is. It helps me during my interviews",
+      "I always struggled with answering 'Tell me about yourself.' With PrepWise, I learned how to structure my responses professionally. Game-changer!",
     image: gmarvis,
     star: 5,
   },
@@ -30,7 +30,7 @@ const testimonialData: Testimonial[] = [
     name: "Rash Lafeh",
     designation: "Developer",
     content:
-      "As a developer, I appreciate how intuitive and efficient this app is. It helps me during my interviews",
+      "I was nervous about technical interviews, but PrepWise made practicing easy. I aced my last interview and got an offer in tech and currently working there!",
     image: rash,
     star: 5,
   },
@@ -38,15 +38,15 @@ const testimonialData: Testimonial[] = [
 
 const Testimonials = () => {
   return (
-    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28 bg-secondary  transition-transform duration-300 transform hover:-translate-y-2">
-      <div className="px-4 md:px-14  ls:px-40  container">
+    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-20 bg-secondary  transition-transform duration-300 transform hover:-translate-y-2">
+      <div className="px-4 md:px-14  ls:px-40  max-w-7xl mx-auto">
         <SectionTitle
           title="What Our Users Say"
           paragraph="Discover the transformation power of personalized learning with Prepwis@, where we help you get hired"
           center
         />
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className=" grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3 ">
           {testimonialData.map((testimonial) => (
             <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
           ))}

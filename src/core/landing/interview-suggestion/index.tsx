@@ -1,101 +1,101 @@
-'use client'
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import interviewPicture from '@/assets/images/interview-man.jpg'
-import InterviewSuggesterSvg from '@/components/svg-components/interview.svg';
 
-const FloatingElement = ({ delay }: {delay: number}) => (
-  <motion.div
-    className="absolute w-12 h-12 rounded-full bg-blue-500 opacity-10"
-    initial={{ y: '100%' }}
-    animate={{ y: ['-100%', '100%'] }}
-    transition={{
-      repeat: Infinity,
-      repeatType: 'reverse',
-      duration: 10,
-      ease: 'easeInOut',
-      delay: delay,
-    }}
-  />
-);
+"use client";
 
-const InterviewSuggestionBox = () => {
-  const [suggestion, setSuggestion] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send } from "lucide-react";
+import Image from "next/image";
+import interviewPic from '@/assets/images/prep-pre.jpg'
 
-  const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-    const pastedText = e.clipboardData.getData('text');
-    setIsLoading(true);
+export default function InteractiveDemo() {
+  const [messages, setMessages] = useState([
+    { text: "Ask me any interview question!", sender: "bot" },
+  ]);
+  const [input, setInput] = useState("");
+
+  const sampleQuestions = [
+    "Tell me about yourself.",
+    "What are your strengths and weaknesses?",
+    "Why should we hire you?",
+  ];
+
+  const getAIResponse = (question: string) => {
+    const responses: { [key: string]: string } = {
+      "Tell me about yourself.": "I'm an AI coach! Tell me about your background, skills, and experience relevant to the job.",
+      "What are your strengths and weaknesses?": "A great answer includes self-awareness. Mention strengths relevant to the job and a weakness you’re improving.",
+      "Why should we hire you?": "Highlight your skills, experience, and what makes you unique. Show how you add value to the company!",
+    };
+    return responses[question] || "Great question! Try structuring your answer with the STAR method.";
+  };
+
+  const sendMessage = (question: string) => {
+    if (!question.trim()) return;
+
+    setMessages((prev) => [...prev, { text: question, sender: "user" }]);
+
     setTimeout(() => {
-      setSuggestion('What challenges did you face in your previous role?');
-      setIsLoading(false);
-    }, 1500);
+      setMessages((prev) => [
+        ...prev,
+        { text: getAIResponse(question), sender: "bot" },
+      ]);
+    }, 1000);
+
+    setInput("");
   };
 
   return (
-    <div className='bg-secondary'>
-    <div className=' flex flex-col md:flex-row items-center justify-center  w-full border-none px-4 lg:max-w-7xl mx-auto gap-8'>
-      <motion.div 
-        className="bg-gray-800 text-blue-200 p-6 rounded-lg shadow-lg w-full md:w-1/2 lg:w-2/5 relative overflow-hidden h-[500px]"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <FloatingElement delay={0} />
-        <FloatingElement delay={2} />
-        <FloatingElement delay={4} />
-        
-        <div className="relative z-10">
-          <h2 className="text-2xl font-bold mb-4">Prep@ wise Suggester</h2>
-          <textarea 
-            className="w-full p-3 bg-gray-700 text-blue-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows={10}
-            placeholder="Paste job description here..."
-            onPaste={handlePaste}
-          ></textarea>
-          {isLoading ? (
-            <motion.div 
-              className="mt-4 text-center"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            >
-           <InterviewSuggesterSvg />
-            </motion.div>
-          ) : suggestion && (
-            <motion.div 
-              className="mt-4 p-4 bg-blue-900 rounded-md"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-xl font-semibold mb-2">Suggested Question:</h3>
-              <p className="text-blue-200">{suggestion}</p>
-            </motion.div>
-          )}
+    <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto p-6 pt-20">
+    <div className="w-full md:w-1/2">
+      <h2 className="text-2xl font-bold mb-4 text-center text-white">🎙️ Try a Live AI Chat!</h2>
+      <div className="h-64 overflow-y-auto border border-gray-700 rounded-lg p-4 space-y-2">
+        {messages.map((msg, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: msg.sender === "user" ? 50 : -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className={`p-3 rounded-lg ${msg.sender === "user" ? "bg-blue-500 text-right ml-auto text-white" : "bg-gray-800 text-white"} max-w-[80%]`}
+          >
+            {msg.text}
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-4 space-y-2">
+        <p className="text-sm text-gray-400">Try these questions:</p>
+        <div className="flex flex-wrap gap-2">
+          {sampleQuestions.map((question, index) => (
+            <button key={index} onClick={() => sendMessage(question)} className="text-sm bg-gray-700 text-white px-3 py-1 rounded-lg hover:bg-gray-600">
+              {question}
+            </button>
+          ))}
         </div>
-      </motion.div>
-      
-      <motion.div 
-        className="mt-8 md:mt-0 md:ml-8 w-full md:w-1/2 lg:w-2/5 "
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-       <div className="relative w-full h-[500px] aspect-square">
-  <Image
-    src={interviewPicture}
-    alt="Interview illustration"
-    layout="fill"
-    objectFit="cover"
-    className="rounded-lg shadow-lg"
-  />
-</div>
-      </motion.div>
+      </div>
+      <div className="mt-4 flex items-center border border-gray-700 rounded-lg p-2">
+        <input
+          type="text"
+          placeholder="Type an interview question..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          className="flex-grow bg-transparent outline-none text-white placeholder-gray-400"
+        />
+        <button onClick={() => sendMessage(input)} className="text-white hover:text-blue-300">
+          <Send size={20} />
+        </button>
+      </div>
     </div>
+  
+    <div className="w-full md:w-1/2 flex justify-center">
+      <div className="relative w-[400px] h-[400px]">
+        <Image
+          src={interviewPic}
+          alt="Interview preparation"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg shadow-lg"
+        />
+      </div>
     </div>
+  </div>
+  
   );
-};
-
-export default InterviewSuggestionBox;
+}
