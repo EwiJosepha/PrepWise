@@ -75,10 +75,10 @@ const Header = () => {
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path
-                              ? "text-primary dark:text-white"
-                              : "text-white hover:text-primary"
-                              }`}
+                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 
+                              ${usePathName === menuItem.path ? "text-primary dark:text-white" : "text-white hover:text-primary"} 
+                              ${menuItem.title === "Sign up" ? " hover:bg-black rounded-sm text-center text-base font-semibold text-white dark:bg-white/10" : ""}`
+                            }
                           >
                             {menuItem.title}
                           </Link>
@@ -93,7 +93,7 @@ const Header = () => {
             <div className=" md:flex items-center space-x-4">
               <Link
                 href="/sign-in"
-                className="px-4 py-3 bg-indigo-500 rounded-sm md:text-base md:font-semibold hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5 text-base font-medium text-white hover:opacity-70 lg:bg-primary"
+                className="px-4 py-3 invisible lg:visible rounded-sm md:text-base md:font-semibold hover:bg-indigo-950 dark:bg-white/10 dark:text-white dark:hover:bg-white/5 text-base font-medium text-white hover:opacity-70 lg:bg-primary"
               >
                 Sign In
               </Link>

@@ -42,7 +42,7 @@ const ChatInput = ({ input, onInputChange, onSubmit }: ChatInputProps) => {
       placeholder="Paste your job here"
       onChange={onInputChange}
       value={input}
-      className="flex-1 px-4 py-3 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black resize-none overflow-auto h-16 md:h-20"
+      className="flex-1 px-4 py-3 w-full rounded-full border border-gray-300 focus:outline-none border-none text-black resize-none overflow-auto h-16 md:h-20"
     />
     
     <button 
