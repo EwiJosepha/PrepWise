@@ -17,7 +17,7 @@ export default function WalkingAnimation() {
         initial={{ x: "100%" }}
         animate={{ x: "-100%" }}
         transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        className="absolute text-xl font-bold text-blue-900  pt-10 invisible md:invisible"
+        className="absolute text-xl font-bold text-blue-900  pt-10 invisible md:visible"
       >
         🎯 Get expert insights & practice tailored questions – Join **Prep Wise** today! 🎯
       </motion.div>
