@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import Button from "@/components/button";
+import Link from 'next/link';
 const CallToAction = () => {
   return (
     <section className="bg-secondary py-16 px-4 sm:px-6 lg:px-8">
@@ -41,9 +42,9 @@ const CallToAction = () => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Button className="rounded-sm bg-black px-6 py-3 text-base font-semibold text-white hover:bg-indigo-950" variant="primary">
+            <Link  href={'/sign-up'} className="rounded-sm  px-6 py-3 text-base font-semibold text-white hover:bg-indigo-950 bg-indigo-500">
               Start Now
-            </Button>
+            </Link>
           </motion.div>
         </div>
       </div>

@@ -39,7 +39,7 @@ const testimonialData: Testimonial[] = [
 const Testimonials = () => {
   return (
     <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-20 bg-secondary  transition-transform duration-300 transform hover:-translate-y-2">
-      <div className="px-4 md:px-14  ls:px-40  max-w-7xl mx-auto">
+      <div className="px-4 md:px-14  lg:px-4  max-w-7xl mx-auto">
         <SectionTitle
           title="What Our Users Say"
           paragraph="Discover the transformation power of personalized learning with Prepwis@, where we help you get hired"
