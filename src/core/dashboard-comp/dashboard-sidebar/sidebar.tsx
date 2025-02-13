@@ -7,12 +7,6 @@ import { useDesktop } from '@/hooks/use-desktop';
 import { SettingIcon, MessageIcon, ProfileIcon } from '@/components/svg-components/side-bar-svg'
 
 
-// import useUserStore from '@/store/useUserStore';
-
-
-// import { getDashboardTabs } from '@/constants/get-dashboard-tabs';
-
-// import { UserTypes } from '@/types/enums';
 import { DashboardLogout } from '@/core/dashboard-comp/dashboard-logout';
 import Link from 'next/link';
 import {  SidebarCloseIcon } from 'lucide-react';
