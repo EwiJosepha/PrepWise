@@ -27,7 +27,7 @@ const testimonialData: Testimonial[] = [
   },
   {
     id: 3,
-    name: "Rash Lafeh",
+    name: "Rash Lahfen",
     designation: "Developer",
     content:
       "I was nervous about technical interviews, but PrepWise made practicing easy. I aced my last interview and got an offer in tech and currently working there!",
@@ -42,7 +42,7 @@ const Testimonials = () => {
       <div className="px-4 md:px-14  lg:px-4  max-w-7xl mx-auto">
         <SectionTitle
           title="What Our Users Say"
-          paragraph="Discover the transformation power of personalized learning with Prepwis@, where we help you get hired"
+          paragraph="Discover the transformation power of personalized learning with Prepwise@, where we help you get hired"
           center
         />
 
