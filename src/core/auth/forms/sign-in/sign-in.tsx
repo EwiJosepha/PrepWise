@@ -12,6 +12,7 @@ import { baseUrl } from '@/lib/constant'
 import { loginUser } from '@/services/user-api'
 import { useState } from 'react'
 import useUserStore from '@/store/useUserStore'
+import { SignInValues } from '@/types/user'
 
 
 const failed = () => toast.warn("Sign in successful")
@@ -25,12 +26,12 @@ function SignIn() {
   const [hasApiError, setHasApiError] = useState(false);
 
 
-  const initialValues = {
+  const initialValues: SignInValues = {
     email: "",
     password: "",
   }
 
-  const onSubmit = async (values: any, { setSubmitting }: any) => {
+  const onSubmit = async (values: SignInValues, { setSubmitting }: any) => {
     setIsLoading(true);
     setErrorMessage('')
     setHasApiError(false)

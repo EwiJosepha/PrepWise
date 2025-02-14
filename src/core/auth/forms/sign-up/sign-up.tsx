@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation'
 import { baseUrl } from '@/lib/constant'
 import { useState } from 'react'
 import useUserStore from '@/store/useUserStore'
+import { FormValues } from '@/types/user'
 const failed = () => toast.warn("Registration Failed")
 const notify = () => toast.success("Registration successful")
 
@@ -24,7 +25,7 @@ function SignUp() {
   const [hasApiError, setHasApiError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const initialValues = {
+  const initialValues: FormValues = {
     firstName: "",
     lastName: "",
     email: "",
@@ -32,7 +33,7 @@ function SignUp() {
     confirmPassword: ""
   }
 
-  const onSubmit = async (  values: any,
+  const onSubmit = async (  values: FormValues,
     { resetForm, setSubmitting }: { resetForm: () => void; setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     resetForm();
@@ -175,7 +176,7 @@ function SignUp() {
             </p>
           </div>
           <div className='h-[25px] lg:h-[2px]'/>
-          <p className='text-center text-[16px] text-slate-gray xl:pt-4 text-white'>
+          <p className='text-center text-[16px] text-slate-gray xl:pt-4 text-white font-bold'>
             ©2025 ALL RIGHTS RESERVED PrepWise@
           </p>
           <div className='h-[45px]' />
