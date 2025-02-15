@@ -1,7 +1,7 @@
 import React from 'react'
 import ComingSoon from '@/components/coming-soon'
 
-function Chat() {
+function Blogs() {
   return (
     <div>
       <ComingSoon />
@@ -9,4 +9,4 @@ function Chat() {
   )
 }
 
-export default Chat
+export default Blogs
