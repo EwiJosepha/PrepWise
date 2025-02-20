@@ -29,12 +29,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > 
-       <AppProvider>
-       <HeaderWrapper />
-       {children}
+      >
+        <AppProvider>
+          <HeaderWrapper />
+          {children}
         </AppProvider>
-         </body>
+      </body>
     </html>
   );
 }
